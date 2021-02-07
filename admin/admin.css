@@ -1,0 +1,394 @@
+.rb-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+    .rb-table th {
+        text-align: left;
+    }
+
+    .rb-table input {
+        width: 100%;
+    }
+
+    table.rb-table td:nth-child(2), table.rb-table td:nth-child(3), table.rb-table th:nth-child(2), table.rb-table th:nth-child(3) {
+        border-right: 1px solid #ececec;
+    }
+
+    table.rb-table tr td {
+        border-top: 1px solid #ececec;
+    }
+
+    table.rb-table tr:nth-child(2n) {
+        background-color: #f1f1f1;
+    }
+
+    table.rb-table input {
+        border: 1px dashed transparent ;
+        background-color: transparent;
+        box-shadow: none;
+    }
+
+    table.rb-table tr:last-of-type input, table.rb-table tr:focus-within input {
+        background-color: #fff;
+        border: 1px dashed #cecece;
+        border-radius: 4px;
+        box-shadow: 0px 1px 4px -2px #aaa;
+    }
+
+    table.rb-table th {
+        color: #616161;
+        padding: 2px 0px 4px 5px;
+        font-size: 0.8em;
+        text-transform: uppercase;
+    }
+
+ul.rb-comp-card-title-list {
+    margin: 10px 0 0 0;
+}
+
+ul.rb-comp-card-title-list > li {
+    display: inline-block;
+    background-color: #ececec;
+    padding: 4px 10px;
+    border: 1px solid #dcdbdb;
+    vertical-align: bottom;    
+    margin: 0 6px 0 0;
+    border-bottom: none;
+    color: #a0a0a0;
+}
+
+ul.rb-comp-card-title-list > li.active, ul.rb-comp-card-title-list > li:hover {
+    background-color: #ffffff;
+    border-color: #e5e5e5;
+    color: #333;
+    cursor: pointer;
+}
+
+ul.rb-comp-card-title-list > li.active {
+    padding: 5px 5px 0 5px;
+    margin-bottom: -1px;
+}
+
+ul.rb-comp-card-title-list > li > input {
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    display: none;
+}
+
+ul.rb-comp-card-title-list > li.active > input {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    display: inline-block;
+    transition: border 0.2s;
+    color: #5d5d5d;
+    padding: 5px 3px;
+    margin: 0px 2px;
+    font-size: 16px;
+    border-bottom: 1px dashed#e4e4e4;
+}
+
+ul.rb-comp-card-title-list > li.active > input + label {
+    display: none;
+}
+
+ul.rb-comp-card-title-list > li.active > input:focus {
+    border-color: #dddddd;
+}
+
+ul.rb-comp-card-content-list {
+    margin: 0;
+    box-shadow: 0px 2px 8px -4px #bfbfbf;
+}
+
+ul.rb-comp-card-content-list > li {
+    display: none;
+    border: 1px solid #e5e5e5;
+    padding: 10px 10px;
+}
+
+ul.rb-comp-card-content-list > li.active {
+    display: block;
+}
+
+span.rb-delete-btn {
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 0;
+    display: block;
+    margin: auto;
+    text-align: center;
+    width: 12px;
+    background-color: #e5e5e5;
+    color: #fff;
+    line-height: 5px;
+    height: 12px;
+    border-radius: 100px;
+    opacity: 0;
+}
+
+tr:hover span.rb-delete-btn, tr:last-of-type span.rb-delete-btn {
+    opacity: 1;
+}
+
+span.rb-delete-btn:hover {
+    background-color: #da6666;
+    border-color: #da6666;
+    color: #fff;
+}
+
+input.rb_i_note, textarea.rb-textarea.rb_i_note {
+    font-style: italic;
+    color: #808080;
+}
+
+a.rb-add-btn span.rb-add-ico {
+    font-size: 27px;
+    margin: 0 0px 0 0;
+    float: left;
+    vertical-align: sub;
+    line-height: 13px;
+}
+
+textarea.rb-textarea {
+    vertical-align: top;
+    width: 100%;
+    margin: 0 1px 4px 2px;
+    border: 1px solid #ececec;
+    box-shadow: none;
+}
+
+#rb-step-list li:nth-child(2n) textarea.rb-textarea {
+    background-color: #f1f1f1;
+} 
+
+textarea.rb-textarea:focus
+{
+    box-shadow: 0px 2px 6px -4px #9c9c9c;
+    border: 1px solid #d4d4d4;
+}
+
+ol#rb-step-list {
+    margin: 0 0 0 24px;
+    list-style: none;
+}
+
+ol#rb-step-list li {
+    position: relative;
+    counter-increment: item;
+    padding: 0 20px 0 0;
+}
+
+ol#rb-step-list li:before {
+    content: counter(item);
+    position: absolute;
+    right: 100%;
+    width: 1.2em;
+    height: 1.2em;
+    line-height: 1.1em;
+    font-size: 10px;
+    text-align: center;
+    border-radius: 100px;
+    color: #484848;
+    border: 1px solid;
+    margin: 2px 5px 0 0;
+}
+
+h2#rb-instruction-header, h2#rb-notes-header {
+    font-weight: 600;
+    margin: 20px 0px 15px 0;
+    color: #23282d;
+    font-size: 16px;
+    padding: 0;
+}
+
+ol#rb-step-list li span.rb-delete-btn {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    opacity: 1;
+}
+
+ul#rb-components-titles li {
+    position: relative;
+}
+
+ul#rb-components-titles li span.rb-delete-btn {
+    display: none;
+}
+
+ul#rb-components-titles li.active span.rb-delete-btn {
+    display: inline-block;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    opacity: 1;
+}
+
+.row.rb-times > div {
+    width: 33.33%;
+    float: left;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+}
+
+.rb-times > div + div {
+    border-left: 1px solid #ddd;
+}
+
+.rb-times > div {
+    text-align: center;
+}
+
+.rb-times > div > table {
+    margin: auto;
+}
+
+.rb-times > div > table input {
+    border-radius: 3px;
+    width: 60px;
+    margin-left: 5px;
+}
+
+.rb-times > div > table label {
+    font-size: 10px;
+    text-transform: uppercase;
+    font-family: arial, sans-serif;
+    vertical-align: sub;
+}
+
+.rb-details table {
+    border-bottom: 1px solid #ddd;
+    border-radius: 3px;
+    width: 100%;
+    margin: 10px 5px;
+}
+
+.rb-details table label {
+    display: block;
+    padding: 0 0 0 6px;
+    color: #888;
+}
+
+.rb-details table input {
+    width: 100%;
+    border: none;
+}
+
+ul.rb-image-select {
+    list-style: none;
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+}
+
+ul.rb-image-select li {
+    float: left;
+}
+
+ul.rb-image-select li input {
+    display: none;
+}
+
+ul.rb-image-select li img {
+    border: 3px solid #dedede;
+    margin-right: 4px;
+}
+
+
+ul.rb-image-select li input:checked + img {
+    border-color: #0073aa;
+}
+
+ul#recipe-images {
+    display: inline-block;
+    width: 100%;
+    background-color: #efefef;
+    border: 1px solid #e5e5e5;
+    padding: 10px 5px 5px 5px;
+    box-sizing: border-box;
+}
+
+ul#recipe-images li {
+    float: left;
+    padding: 0px;
+    margin: 0 0 5px 5px;
+    width: 100%;
+    position: relative;
+}
+
+ul#recipe-images li img {
+    vertical-align: top;
+    height: auto;
+    width: auto;
+    margin: auto;
+    float: left;
+    box-shadow: 0px 1px 6px -2px #c1c1c1;
+    border: 2px solid #fff;
+}
+
+ul#recipe-images a.recipe_remove_image_button {
+    display: block;
+    position: absolute;
+    left: 154px;
+    background-color: #fff;
+    padding: 7px 10px;
+    line-height: 1;
+    text-align: left;
+    font-size: 12px;
+    box-shadow: 0px 1px 6px -2px #c1c1c1;
+    text-decoration: none;
+    color: #999;
+}
+
+ul#recipe-images a.recipe_remove_image_button:hover {
+    color: #f15f5f;
+}
+
+.rb_meta_nuts {
+    text-align: center;
+}
+
+table.rb_nut_table {
+    max-width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 20px;
+}
+
+table.rb_nut_table td {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #d0d0d0
+}
+
+table.rb_nut_table input {
+    width: 100%;
+    max-width: 110px;
+    border: none;
+    text-align: center;
+    color: #666;
+    padding: 0;
+}
+
+table.rb_nut_table button {
+    border: none;
+    background: none;
+    color: #0073aa;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+table.rb_nut_table button:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .row.rb-times > div {
+        width: 100%;
+    }
+}

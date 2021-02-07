@@ -1,0 +1,158 @@
+div#content {
+    width: 100%;
+    max-width: 1440px;
+    margin: auto;
+}
+
+.rb-ol-header-card {
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.rb-ol-header-card > a {
+    position: absolute;
+    opacity: 0.5;
+    right: 0;
+    background-color: #333333;
+    color: #fff;
+    font-size: 0.8em;
+    text-align: center;
+    line-height: 2.5;
+    transition: all 0.2s;
+    bottom: -3.1em;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 4px 20px;
+}
+
+.rb-ol-header-card:hover > a {
+    opacity: 1;
+    bottom: 0em;
+}
+
+h1.rb-ol-title {
+    margin: 40px 0 0 0;
+    font-size: 2em;
+}
+
+.rb-ol-main {
+    padding-left: 200px;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.rb-ol-img-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rb-ol-images {
+    position: absolute;
+    left: 0;
+    width: 200px;
+    height: 100%;
+}
+
+ul.rb-ol-ing-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rb-ol-content {
+    padding: 20px 30px 20px 30px;
+    margin-bottom: 100px;
+}
+
+h4.rb-ol-comp-title {
+    font-size: 1.1em;
+    border-bottom: 1px dashed#dadada;
+    color: #484848;
+    font-style: italic;
+    line-height: 1.3em;
+    font-weight: bold;
+}
+
+ul.rb-ol-ing-list {
+    list-style: none;
+    padding: 0;
+}
+
+ul.rb-ol-ing-list > li {
+    margin: 0 0 1.2em 0;
+}
+
+ul.rb-ol-ing-list > li i {
+    opacity: 0.5;
+    margin-left: 20px;
+    font-size: 0.9em;
+    float: right;
+}
+
+ul.rb-ol-table {
+    margin: 0 0 40px 0;
+    list-style: none;
+    padding: 0;
+}
+
+ul.rb-ol-table li {
+    padding: 0 16px 0 0;
+    display: inline-block;
+    line-height: 1;
+}
+
+ul.rb-ol-table li + li {
+    border-left: 1px solid #dadada;
+    padding: 0 16px 0 16px;
+}
+
+.rb-ol-steps>p {
+    line-height: 2.2;
+}
+
+.rb-ol-spacer {
+    border-bottom: 1px solid #dadada;
+    margin: 25px 0;
+}
+
+.rb-ol-meta {
+    position: absolute;
+    bottom: 0;
+    left: 200px;
+    right: 0;
+    margin: auto;
+    text-align: center;
+}
+
+table.rb-ol-nutrients {
+    background-color: #fff;
+    background-color: #ffffffa6;
+    border: 1px solid;
+    text-align: center;
+    margin: 50px auto 20px auto;
+    width: 80%;
+}
+
+table.rb-ol-nutrients tr > * {
+    border: 1px solid;
+    padding: 5px;
+    line-height: 1;
+    width: 100px;
+}
+
+.rb-ol-terms {
+    float: right;
+    font-size: 17px;
+    color: #b5b5b5;
+    font-style: italic;
+}
+
+.rb-ol-terms a {
+    color: #b9b8b8;
+    font-size: 0.8em;
+}

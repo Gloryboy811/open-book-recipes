@@ -1,0 +1,229 @@
+div#content {
+    width: 100%;
+    max-width: 1440px;
+    margin: auto;
+}
+
+.rb-mag-wrapper {
+    display: inline-block;
+    width: 100%;
+}
+
+.rb-mag-text {
+    float: left;
+    width: 33%;
+    color: #000;
+    border-left: 1px solid #00BCD4;
+    padding: 0 30px 0 35px;
+    font-size: 0.9em;
+    background-color: #ececec;
+    box-shadow: -2px 1px 15px -10px #000;
+}
+
+.rb-mag-images {
+    float: right;
+    width: 67%;
+    overflow: auto;
+}
+
+.rb-mag-images::-webkit-scrollbar {
+    display: none;
+    }
+
+ul#rb-mag-meta {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.rb-mag-spacer {
+    height: 40px;
+}
+
+ul.rb-mag-ing-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+h4.rb-mag-comp-title {
+    font-size: 1em;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    color: inherit;
+    position: relative;
+    left: -20px;
+    font-style: italic;
+    font-weight: 400;
+}
+
+h1.rb-recipe-title {
+    position: relative;
+    left: -20px;
+    color: #000;
+    z-index: 5;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+h1.rb-recipe-title:before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    right: 30px;
+    height: 7px;
+    background-color: #00bcd5;
+    bottom: -16px;
+    z-index: -1;
+}
+
+ul.rb-mag-img-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+}
+
+ul.rb-mag-img-list li {
+    position: relative;
+}
+
+ul.rb-mag-img-list li img {
+    width: 100%;
+}
+
+.rb-mag-excerpt-block {
+    position: absolute;
+    bottom: 40px;
+    right: 30px;
+    width: 33%;
+    color: #fff;
+}
+
+.rb-mag-excerpt-block p {
+    position: relative;
+    font-weight: bold;
+    line-height: 1.25;
+    font-size: 1.1em;
+    text-align: right;
+    margin: 0;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.rb-mag-excerpt-block p:after {
+    content: '"';
+    position: relative;
+    left: 3px;
+    color: #00BCD4;
+    font-weight: bold;
+    font-size: 2em;
+    margin-right: -5px;
+    vertical-align: middle;
+    line-height: 0.5em;
+    height: 0.5em;
+}
+
+.rb-mag-excerpt-block p:before {
+    content: '"';
+    color: #00BCD4;
+    font-weight: bold;
+    font-size: 2em;
+    margin-right: 3px;
+    vertical-align: middle;
+    line-height: 0.5em;
+    height: 0.5em;
+    display: inline-block;
+}
+
+.rb-mag-excerpt-block:before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    right: 0;
+    width: 75px;
+    height: 10px;
+    background: #00bcd3;
+}
+
+p.rb-mag-tag-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #00BCD4;
+}
+
+p.rb-mag-tag-list a {
+    color: #00BCD4;
+}
+
+p.rb-mag-step-list {
+    margin: 0;
+}
+
+p.rb-mag-notes {
+    background: #00bcd5;
+    color: #fff;
+    padding: 15px 15px 25px 15px;
+    line-height: 1.4;
+    font-size: 0.9em;
+    position: relative;
+    left: -10px;
+}
+
+span.rb-mag-hi {
+    background-color: #00bcd5;
+    color: #fff;
+    padding: 2px 11px;
+    text-transform: uppercase;
+}
+
+ul.rb-mag-img-list li {
+    float: left;
+    width: 100%;
+    width: Calc(100% + 4px);
+}
+
+ul.rb-mag-img-list li.rb-mag-gal-three > div {
+    float: left;
+    width: 33.33%;
+}
+
+ul.rb-mag-img-list li.rb-mag-gal-two > div {
+    float: left;
+    width: 50%;
+}
+
+ul.rb-mag-img-list li.rb-mag-gal-three > div, ul.rb-mag-img-list .rb-mag-gal-two > div {
+    padding: 0 2px;
+}
+
+ul.rb-mag-img-list li.rb-mag-gal-three > div:nth-child(1), ul.rb-mag-img-list .rb-mag-gal-two > div:nth-child(1) {
+    margin-left: -2px;
+}
+
+ul.rb-mag-img-list li.rb-mag-gal-three > div:nth-child(3), ul.rb-mag-img-list .rb-mag-gal-two > div:nth-child(2)  {
+    margin-right: -2px;
+}
+
+ul.rb-mag-img-list li + li {
+    padding-top: 4px;
+}
+
+.rb-magblock-img > span {
+    width: 100%;
+    display: inline-block;
+    background-position: center;
+    background-size: cover;
+}
+
+.rb-magblock-img > span:before {
+    content: '';
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 100%;
+}

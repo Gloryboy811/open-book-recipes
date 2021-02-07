@@ -1,0 +1,404 @@
+
+.rb-wrapper {
+    max-width: 1440px;
+    margin: auto;
+}
+
+.rb-title-block {
+    width: 100%;
+    display: inline-block;
+    box-shadow: 0px 10px 8px -4px rgba(0,0,0,0.2);
+    position: relative;
+    background-color: #fff;
+    margin-top: 10px;
+}
+
+.rb-title {
+    width: 60%;
+    float: left;
+    padding: 20px 20px;
+    margin-bottom: 40px;
+}
+
+.rb-excerpt-text p {
+    margin: 0;
+    font-weight: 400;
+    font-family: sans-serif;
+}
+
+.rb-image {
+    float: right;
+    width: 40%;
+    padding-bottom: 30%;
+    height: 0px;
+    position: relative;
+}
+
+.rb-image .gallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.rb-image div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+ul.rb-gallery-list {
+    margin: 10px 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+ul.rb-gallery-list li {
+    width: 100px;
+    display: inline-block;
+    margin: 15px;
+    border-radius: 15px;
+    overflow: hidden;
+    vertical-align: top;
+    box-shadow: 0px 10px 8px -4px rgba(0,0,0,0.2);
+}
+
+ul.rb-gallery-list li:hover {
+    box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.2);
+}
+
+.rb-square-img {
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 100%;
+    background-position: center;
+    background-size: contain;
+    vertical-align: top;
+    transition-duration: 0.5s;
+}
+
+a:hover .rb-square-img {
+    transform: scale(1.2);
+}
+
+.rb-title-top {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    vertical-align: top;
+}
+
+.rb-title-footer {
+    width: 100%;
+    background-color: #f7f7f7;
+    font-size: 16px;
+    line-height: 3;
+    display: inline-block;
+}
+
+.rb-excerpt-text {
+    font-size: 18px;
+    line-height: 1.4;
+    color: #aaa;
+    margin: 0 100px 0 30px;
+    font-style: italic;
+    font-family: sans-serif;
+    background-color: #5ddaf7;
+    color: #dfff;
+    padding: 2px 8px;
+    margin: 10px 24px;
+    font-weight: 200;
+}
+
+ul.rb-details-list {
+    list-style: none;
+    margin: 10px 10px;
+    font-family: sans-serif;
+}
+
+ul.rb-details-list li {
+    display: inline-block;
+    color: #9e9e9e;
+    padding: 0 15px;
+}
+
+ul.rb-details-list li + li {
+    border-left: 1px solid #cacaca;
+}
+
+ul.rb-details-list li a {
+    border: 1px solid #9e9e9e;
+    border-radius: 100px;
+    padding: 5px 10px;
+    color: inherit;
+}
+
+h1.rb-recipe-title {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-size: 4em;
+    vertical-align: top;
+}
+
+h1.rb-recipe-title:before {
+    content: none;
+}
+
+.rb-basic-content-block {
+    box-shadow: 0px 10px 8px -4px rgba(0,0,0,0.2);
+    background-color: #f7f7f7;
+    padding: 20px 40px 30px 40px;
+    margin: 20px 0px;
+}
+
+table.rb-times-table {
+    line-height: 1;
+    font-size: 14px;
+    width: auto;
+    max-width: 100%;
+    float: right;
+    margin: -11px 0 0px 0;
+    text-align: right;
+    border: none;
+    color: #717171;
+}
+
+table.rb-times-table td {
+    border-style: none;
+    vertical-align: top;
+    text-align: center;
+    padding: 0 8px;
+}
+
+table.rb-times-table h3 {
+    margin: 0;
+    font-size: 1em;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+table.rb-times-table div div.rb-time-part {
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 4px;
+}
+
+.rb-time-amount {
+    border-radius: 100px;
+    text-align: center;
+    padding: 5px 7px;
+    display: inline-block;
+    color: #ffffff;
+    background-color: #afafaf;
+}
+
+h4.rb-comp-subtitle {
+    margin: 12px 20px 0px 0px;
+    font-weight: 400;
+    color: #7b7b7b;
+}
+
+.rb-comp-ing {
+    background-color: #fff;
+    /* border-radius: 10px; */
+    box-shadow: 0px 6px 6px -6px rgba(0,0,0,0.2);
+    /* border: 1px solid #dedede; */
+    padding: 10px 20px;
+}
+
+table.rb-basic-ing-list {
+    margin: 0;
+    font-size: 20px;
+    border: none;
+    font-family: sans-serif;
+}
+
+table.rb-basic-ing-list td {
+    border: none;
+    padding: 10px 20px;
+    line-height: 1;
+    font-size: 1em;
+}
+
+table.rb-basic-ing-list tr + tr td {
+    border-top: 1px solid #eee;
+}
+
+table.rb-basic-ing-list td:nth-child(1) {
+    white-space: nowrap;
+    width: 1%;
+    border-right: 2px dotted#ddd;
+}
+
+ol.rb-basic-steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ol.rb-basic-steps li {
+    margin: 0 0 14px 0px;
+}
+
+ol.rb-basic-steps div p {
+    margin: 8px 0px;
+    line-height: 1.5;
+    font-size: 18px;
+    color: #333;
+    font-family: sans-serif;
+}
+
+p.rb-notes {
+    font-size: 16px;
+    margin: 20px 10px 0 10px;
+}
+
+table.rb-nutrients {
+    width: 80%;
+    margin: 30px auto;
+    font-size: 16px;
+    background-color: #fff;
+    box-shadow: 0px 10px 8px -4px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+table.rb-nutrients td, table.rb-nutrients th {
+    border: 1px dotted#a5a5a5;
+}
+
+table.rb-basic-ing-list td i {
+    font-weight: lighter;
+    font-family: sans-serif;
+    font-size: 0.8em;
+    vertical-align: bottom;
+    float: right;
+    line-height: 1.2em;
+}
+
+
+/*
+    MEDIA QUERIES
+*/
+@media (max-width: 1400px) and (min-width: 601px)  {
+    .rb-image {
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        padding-bottom: 0;
+    }
+
+    h1.rb-recipe-title {
+        font-size: 3.8em;
+    }
+}
+
+
+@media (max-width: 900px) {
+    h1.rb-recipe-title {
+        font-size: 3.2em;
+    }
+
+    ul.rb-details-list li + li {
+        border-left: none;
+    }
+
+    ul.rb-details-list {
+        text-align: center;
+    }
+}
+
+@media (max-width: 750px) {
+    h1.rb-recipe-title {
+        font-size: 2.8em;
+    }
+
+    ul.rb-gallery-list li {
+        width: 15%;
+        margin: 1px 1%;
+    }
+}
+
+@media (max-width: 650px) {
+
+    h1.rb-recipe-title {
+        font-size: 2.4em;
+    }
+}
+
+
+@media (max-width: 600px) { 
+    .rb-title {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 0;
+    }
+
+    .rb-image {
+        width: 100%;
+        padding-bottom: 60%;
+    }
+
+}
+
+@media (max-width: 500px) {
+    
+
+    h1.rb-recipe-title {
+        font-size: 2.5em;
+    }
+
+    
+    .rb-excerpt-text {
+        margin: 6px -12px;
+        padding: 1px 15px;
+        background: #5ddaf7;
+        font-size: 14px;
+        padding: 6px 11px;
+    }
+
+    .rb-excerpt-text p {
+        margin: 0;
+    }
+
+    table.rb-times-table {
+        width: 100%;
+        margin: 0 0 10px 0;
+    }
+
+    .rb-comp-ing {
+        margin: 0 -30px;
+        padding: 7px 6px;
+    }
+
+    table.rb-basic-ing-list {
+        font-size: 16px;
+    }
+
+    table.rb-basic-ing-list tr td:nth-child(1) {
+        width: 80px;
+        padding: 10px 5px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: normal;
+        line-height: 0.8;
+    }
+
+    table.rb-nutrients {
+        width: 96%;
+        font-size: 11px;
+    }
+
+    ol.rb-basic-steps div p {
+        font-size: 16px;
+    }
+
+}
