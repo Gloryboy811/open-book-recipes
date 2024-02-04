@@ -27,7 +27,11 @@ function recipe_image_uploader_field( $name, $values = '') {
 		} 
 	}
 
-	return '<div><ul id="recipe-images">' . $images . '</ul><a href="#" class="recipe_upload_image_button button">Select Images</a> <a href="#" class="recipe_clear_gallery_button button" style="display:'.$display.'">Remove All</a></div>';
+	if (isset($images)) {
+		return '<div><ul id="recipe-images">' . $images . '</ul><a href="#" class="recipe_upload_image_button button">Select Images</a> <a href="#" class="recipe_clear_gallery_button button" style="display:'.$display.'">Remove All</a></div>';
+	}
+	return '<div><a href="#" class="recipe_upload_image_button button">Select Images</a> <a href="#" class="recipe_clear_gallery_button button" style="display:'.$display.'">Remove All</a></div>';
+	
 }
 
 function recipe_include_myuploadscript() {
@@ -68,7 +72,9 @@ function recipe_save( $post_id ) {
 	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) 
 		return $post_id;
 	$meta_key = 'gallery_images';
-	update_post_meta( $post_id, $meta_key, $_POST['rb_gallery']); 
+	if (isset($_POST['rb_gallery'])) {
+		update_post_meta( $post_id, $meta_key, $_POST['rb_gallery']); 
+	}
 	return $post_id;
 }
 

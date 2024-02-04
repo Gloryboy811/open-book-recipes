@@ -117,14 +117,53 @@ function recipe_tax_init() {
 }
 add_action( 'init', 'recipe_tax_init' );
 
+
+add_filter( 'the_content', 'add_recipe_info', 1 );
+
+function add_recipe_info($content) {
+	global $post;
+
+	if ( is_singular() && in_the_loop() && is_main_query() && $post->post_type == 'recipes' ) {
+
+		$options = get_option( 'recipebook_settings' );
+		$theme = $options['layout_theme'] ? $options['layout_theme'] : 'basic';
+
+		// check layout theme
+		$content_file =  dirname( __FILE__ )  . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'single-'.$theme.'.php';
+
+		if (!file_exists($content_file  ) ) {
+			return $content;
+		}
+
+		$the_content = $content;
+
+		ob_start();
+			include_once($content_file);
+			echo '<style>'.$options['custom_css'].'</style>';
+		$content = ob_get_clean();
+		$content = str_replace("    ", '', $content);
+		//$content = str_replace(array("\r", "\n"), '', $content);
+		//echo '<this>'.$content.'</this>';
+
+	}
+	
+	return $content;
+}
+
+
 /* Filter the single_template with our custom function*/
-add_filter('single_template', 'my_custom_template');
+/*add_filter('single_template', 'my_custom_template');
+
+ob_get_contents() - Return the contents of the output buffer
+ob_clean() - Clean (erase) the contents of the active output buffer
+ob_end_clean() - Clean (erase) the contents of the active output buffer and turn it off
+ob_get_flush() - F
 
 function my_custom_template($single) {
 
     global $post;
 
-    /* Checks for single template by post type */
+    // Checks for single template by post type 
     if ( $post->post_type == 'recipes' ) {
 		$file =  dirname( __FILE__ )  . DIRECTORY_SEPARATOR .'single-recipes.php';
         if ( file_exists($file  ) ) {
@@ -135,9 +174,9 @@ function my_custom_template($single) {
     }
     return $single;
 
-}
+}*/
 
-add_filter('template_include', 'recipes_template');
+/*add_filter('template_include', 'recipes_template');
 
 function recipes_template( $template ) {
   if ( is_post_type_archive('recipes') ) {
@@ -151,7 +190,7 @@ function recipes_template( $template ) {
   }
   return $template;
 }
-
+*/
 
 
 function my_rewrite_flush() {
@@ -191,10 +230,14 @@ function showJsonString($value) {
 function toFrac($num) {
 	$frac = ['½', '⅓','⅔','¼','¾','⅛','⅜','⅝','⅞'];
 	$str = ['1/2', '1/3','2/3','1/4','3/4','1/8','3/8','5/8','7/8'];
+	/*
 	$s = array_search($num, $str);
 	if ($s !== false) {
 		return $frac[$s];
-	}
+	}*/
+
+	$num = str_replace($str, $frac, $num);
+
 	return $num;
 }
 // include_once('admin/settings.php');
