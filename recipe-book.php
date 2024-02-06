@@ -142,7 +142,7 @@ function add_recipe_info($content) {
 			echo '<style>'.$options['custom_css'].'</style>';
 		$content = ob_get_clean();
 		$content = str_replace("    ", '', $content);
-		//$content = str_replace(array("\r", "\n"), '', $content);
+		$content = str_replace(array("\r", "\n"), '', $content);
 		//echo '<this>'.$content.'</this>';
 
 	}

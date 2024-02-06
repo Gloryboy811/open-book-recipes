@@ -41,7 +41,12 @@ ul.rb-gallery-list li:hover {
 }
 
 .rb-square-img {
-
+    width: 140px;
+    height: 140px;
+    border-radius: 20px;
+    background-position: center;
+    background-size: cover;
+    display: inline-block;
 }
 
 a:hover .rb-square-img {
@@ -149,14 +154,18 @@ table.rb-basic-ing-list tr:nth-child(2n) td {
 }
 
 table.rb-basic-ing-list td:nth-child(1) {
-    max-width: 20px;
-    /* white-space: nowrap; */
+    width: 15%;
+    
     border: none;
     border-right: 4px solid var(--wp--preset--color--contrast-2);
     text-align: right;
     font-size: 14px;
     /* color: var(--wp--preset--color--contrast-2); */
     /* font-weight: bold; */
+}
+
+table.rb-basic-ing-list td:nth-child(2) {
+   
 }
 
 ol.rb-basic-steps {
@@ -171,22 +180,29 @@ ol.rb-basic-steps div p {
 
 }
 
-p.rb-notes {
-
+div.rb-notes {
+    border-top: 1px solid var(--wp--preset--color--contrast-2);;
+    padding: 20px 10px;
+    margin: 30px 0 0 0;
+    color: var(--wp--preset--color--contrast-2);
+    font-style: italic;
 }
 
 table.rb-nutrients {
-
+    background-color: #fff;
+    min-width: 100%;
+    border-radius: 10px;
+    text-align: center;
 }
 
 table.rb-nutrients td, table.rb-nutrients th {
-
+    padding: 0px 5px;
 }
 
-table.rb-basic-ing-list td i {
-    color: var(--wp--preset--color--contrast-2);
-}
 
+.rb-meta {
+    overflow: auto;
+}
 
 /*
     MEDIA QUERIES

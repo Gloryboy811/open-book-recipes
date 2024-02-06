@@ -7,7 +7,7 @@
 function recipe_image_uploader_field( $name, $values = '') {
 	$image_size = 'thumbnail'; // it would be better to use thumbnail size here (150x150 or so)
 	$display = 'none'; // display state ot the "Remove image" button
-	$image = '';
+	$images = '';
 
 	if (is_array($values)) {
 		foreach($values as $key => $value) {
@@ -27,11 +27,7 @@ function recipe_image_uploader_field( $name, $values = '') {
 		} 
 	}
 
-	if (isset($images)) {
-		return '<div><ul id="recipe-images">' . $images . '</ul><a href="#" class="recipe_upload_image_button button">Select Images</a> <a href="#" class="recipe_clear_gallery_button button" style="display:'.$display.'">Remove All</a></div>';
-	}
-	return '<div><a href="#" class="recipe_upload_image_button button">Select Images</a> <a href="#" class="recipe_clear_gallery_button button" style="display:'.$display.'">Remove All</a></div>';
-	
+	return '<div><ul id="recipe-images">' . $images . '</ul><a href="#" class="recipe_upload_image_button button">Select Images</a> <a href="#" class="recipe_clear_gallery_button button" style="display:'.$display.'">Remove All</a></div>';
 }
 
 function recipe_include_myuploadscript() {

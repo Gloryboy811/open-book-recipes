@@ -48,21 +48,6 @@
             <?php } ?>
         </div>
     </div>
-    <ul class="rb-gallery-list">
-        <?php 
-            $gallery_pics = get_post_meta($post->ID, 'gallery_images', true);
-            if (is_array($gallery_pics)) {
-            foreach($gallery_pics as $key => $pic) {
-                $image_attributes = wp_get_attachment_image_src( $pic, 'full' ); 
-                ?>
-                <li>
-                    <a href="<?php echo $image_attributes[0]; ?>" target="_blank"><div class="rb-square-img" style="background-image: url('<?php echo $image_attributes[0]; ?>')"></div></a>
-                </li>
-            <?php
-            }
-        } 
-        ?>
-    </ul>
     <div class="rb-basic-content-block">
         <?php
             $timesJson = get_post_meta( $post->ID, '_rb_recipe_times', true );
@@ -175,7 +160,7 @@
         
         </ol>
         <?php if ($notes) { ?>
-            <p class="rb-notes"><i><?php echo $notes; ?></i></p>
+            <div class="rb-notes"><?php echo $notes; ?></div>
         <?php } ?>
 
     </div>
@@ -205,4 +190,17 @@
                 </tbody>
             </table>
         </div>
+        <ul class="rb-gallery-list"><?php 
+        $gallery_pics = get_post_meta($post->ID, 'gallery_images', true);
+        if (is_array($gallery_pics)) {
+            foreach($gallery_pics as $key => $pic) {
+            $image_attributes = wp_get_attachment_image_src( $pic, 'full' ); 
+            ?><li>
+                <a href="<?php echo $image_attributes[0]; ?>" target="_blank">
+                    <span class="rb-square-img" style="background-image: url('<?php echo $image_attributes[0]; ?>')"></span>
+                </a>
+            </li><?php
+            }
+        } 
+        ?></ul>
     </div>
