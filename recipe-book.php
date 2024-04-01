@@ -142,13 +142,25 @@ function add_recipe_info($content) {
 			echo '<style>'.$options['custom_css'].'</style>';
 		$content = ob_get_clean();
 		$content = str_replace("    ", '', $content);
-		$content = str_replace(array("\r", "\n"), '', $content);
+		$content = str_replace(array("<p></p>", "\r", "\n"), '', $content);
 		//echo '<this>'.$content.'</this>';
 
 	}
 	
 	return $content;
 }
+
+
+function my_javascripts() {
+    /*$script_file =  dirname( __FILE__ )  . DIRECTORY_SEPARATOR . 'script' . DIRECTORY_SEPARATOR . 'recipe-book-front.js';
+	echo "<script>";
+		include_once($script_file);
+	echo "</script>";*/
+
+	$script_fil2e =  recipebook_url . 'script' . DIRECTORY_SEPARATOR . 'recipe-book-front.js';
+    wp_enqueue_script( 'recipe-book-front', $script_fil2e);
+}
+add_action( 'wp_enqueue_scripts', 'my_javascripts' );
 
 
 /* Filter the single_template with our custom function*/

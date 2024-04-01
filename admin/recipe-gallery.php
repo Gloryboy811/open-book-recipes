@@ -44,7 +44,7 @@ add_action( 'admin_menu', 'recipe_meta_box_add' );
  
 function recipe_meta_box_add() {
 	add_meta_box('recipediv', // meta box ID
-		'Recipe Gallery', // meta box title
+		'Recipe Extra Pics', // meta box title
 		'recipe_print_box', // callback function that prints the meta box HTML 
 		'recipes', // post type where to add it
 		'side', // priority

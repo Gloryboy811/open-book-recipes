@@ -2,6 +2,38 @@
 include_once('settings.php');
 include_once('recipe-gallery.php');
 
+function recipebook_amount_fraction_convert( $amount_decimal ) {
+    if (strpos($amount_decimal, '.') == false) 
+    { return $amount_decimal; }
+
+    $TheFloatVal = floatval($amount_decimal);
+    return recipebook_float_to_frac($TheFloatVal);
+ }
+
+function recipebook_float_to_frac($n, $tolerance = 1.e-6) {
+    
+    $h1=1; $h2=0;
+    $k1=0; $k2=1;
+    $b = 1/$n;
+    do {
+        $b = 1/$b;
+        $a = floor($b);
+        $aux = $h1; $h1 = $a*$h1+$h2; $h2 = $aux;
+        $aux = $k1; $k1 = $a*$k1+$k2; $k2 = $aux;
+        $b = $b-$a;
+    } while (abs($n-$h1/$k1) > $n*$tolerance);
+
+    if ($h1 > $k1) {
+        $h3 = floor($h1 / $k1);
+        $h1 = $h1 - ($h3 * $k1);
+
+        return "$h3 $h1/$k1";
+
+    } else {
+        return "$h1/$k1";
+    }
+
+}
 
 class RecipeBook_Admin {
     static $instance;
@@ -71,7 +103,8 @@ class RecipeBook_Admin {
     function recipebook_recipe_meta_box_callback( $post ) {
         include_once('edit-recipe.php');
     }
-     
+
+    
 
     function recipebook_recipe_save_meta( $post_id ) {
 
@@ -112,9 +145,13 @@ class RecipeBook_Admin {
                 foreach ($_POST['rb_component'.$key.'_rb_ingredient_name'] as $i => $title) {
                     //do something
                     if ($title == '' && $$_POST['rb_component'.$key.'_rb_ingredient_extra'][$i] == '') continue;
+
+                    $amountConv = recipebook_amount_fraction_convert($_POST['rb_component'.$key.'_rb_ingredient_amount'][$i]);
+
+
                     $ingredientJson = 
                     '{ "title": "'.escapeJsonString($title).
-                        '", "amount": "'.$_POST['rb_component'.$key.'_rb_ingredient_amount'][$i].
+                        '", "amount": "'.$amountConv.
                         '", "denom": "'.$_POST['rb_component'.$key.'_rb_ingredient_denominator'][$i].
                         '", "extra": "'.$_POST['rb_component'.$key.'_rb_ingredient_extra'][$i].
                         '"}';
@@ -148,6 +185,7 @@ class RecipeBook_Admin {
 
             $dets = '{ "cals": "'.$_POST['rb_d_calories'].
                 '", "serves": "'.$_POST['rb_d_serves'].
+                '", "url": "'.$_POST['rb_d_url'].
                 '", "difficulty": "'.$_POST['rb_d_difficulty'].'" }';
 
             update_post_meta( $post_id, '_rb_recipe_details', $dets );    

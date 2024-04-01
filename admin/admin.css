@@ -114,20 +114,21 @@ ul.rb-comp-card-content-list > li.active {
 
 span.rb-delete-btn {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 14px;
     cursor: pointer;
     transition: all 0.2s;
     padding: 0;
     display: block;
     margin: auto;
     text-align: center;
-    width: 12px;
+    width: 16px;
     background-color: #e5e5e5;
     color: #fff;
-    line-height: 5px;
-    height: 12px;
+    line-height: 1em;
+    height: 16px;
     border-radius: 100px;
     opacity: 0;
+    font-family: sans-serif;
 }
 
 tr:hover span.rb-delete-btn, tr:last-of-type span.rb-delete-btn {
@@ -228,7 +229,7 @@ ul#rb-components-titles li.active span.rb-delete-btn {
     opacity: 1;
 }
 
-.row.rb-times > div {
+.row > .col-sm-4 {
     width: 33.33%;
     float: left;
     box-sizing: border-box;
@@ -387,8 +388,55 @@ table.rb_nut_table button:hover {
     text-decoration: underline;
 }
 
+.labeled_input {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+}
+
+.labeled_input > input {
+    width: 100%;
+}
+
+.labeled_input > label {
+    padding: 8px 8px;
+    font-size: 12px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 1em;
+    margin: auto;
+    line-height: 1;
+}
+
+.labeled_input._label_right > input[type="number"]:hover + label, .labeled_input._label_right > input[type="number"] + label:hover {
+    right: 24px;
+}
+
+
+.labeled_input._label_right > label {
+    left: auto;
+    right: 0;
+}
+
+.rb-meta-block {
+    padding: 8px 16px;
+}
+
+.rb-meta-block > label {
+    width: 100%;
+    display: block;
+}
+
+.rb-meta-block > input {
+    width: 100%;
+}
+
 @media (max-width: 900px) {
     .row.rb-times > div {
         width: 100%;
     }
 }
+
+

@@ -61,28 +61,28 @@
 <hr/>
 <div class="row rb-details">
     <div class="col-sm-4">
-        <table>
-            <tr>
-                <td><label for="rb_d_calories">Calories:</label></td>
-                <td><input type="text" name="rb_d_calories" id="rb_d_calories" value="<?php echo $details ? $details->cals : ''; ?>" /></td>
-            </tr>
-        </table>
+        <div class="rb-meta-block">
+            <label for="rb_d_calories">Calories Per Serving:</label>
+            <div class="labeled_input _label_right"><input type="number" name="rb_d_calories" id="rb_d_calories" value="<?php echo $details ? $details->cals : ''; ?>" /><label for="rb_d_calories">KCal</label></div>
+        </div>
     </div>
     <div class="col-sm-4">
-        <table>
-            <tr>
-                <td><label for="rb_d_serves">Serves:</label></td>
-                <td><input type="text" name="rb_d_serves" id="rb_d_serves" value="<?php echo $details ? $details->serves : ''; ?>" /></td>
-            </tr>
-        </table>
+        <div class="rb-meta-block">
+            <label for="rb_d_serves">Serves:</label>
+            <div class="labeled_input _label_right"><input type="number" name="rb_d_serves" id="rb_d_serves" value="<?php echo $details ? $details->serves : ''; ?>" /><label for="rb_d_serves">people</label></div>
+        </div>
     </div>
     <div class="col-sm-4">
-        <table>
-            <tr>
-                <td><label for="rb_d_difficulty">Difficulty:</label></td>
-                <td><input type="text" name="rb_d_difficulty" id="rb_d_difficulty" value="<?php echo $details ? $details->difficulty : ''; ?>" /></td>
-            </tr>
-        </table>
+        <div class="rb-meta-block">
+            <label for="rb_d_difficulty">Difficulty:</label>
+            <input type="text" placeholder="easy, difficult, etc" name="rb_d_difficulty" id="rb_d_difficulty" value="<?php echo $details ? $details->difficulty : ''; ?>" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="rb-meta-block">
+            <label for="rb_d_url">Origin URL:</label>
+            <input type="text" placeholder="http://" name="rb_d_url" id="rb_d_url" value="<?php echo $details && isset($details->url) ? $details->url : ''; ?>" />
+        </div>
     </div>
 </div>
 <div class="rb_meta_nuts">

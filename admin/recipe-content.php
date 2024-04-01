@@ -70,7 +70,7 @@
                                 <td><input value="<?php echo $objInfo->denom ?>" type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_denominator[<?php echo $in_counter; ?>]"/></td>
                                 <td><input value="<?php echo $objInfo->title ?>" type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_name[<?php echo $in_counter; ?>]"/></td>
                                 <td><input class="rb_i_note" value="<?php echo $objInfo->extra ?>" type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_extra[<?php echo $in_counter; ?>]"/></td>
-                                <td><span onclick="rbDeleteI(<?php echo $compCount; ?>,<?php echo $in_counter; ?>);" class="rb-delete-btn" title="Remove Ingredient">-</span></td>
+                                <td><span onclick="rbDeleteI(<?php echo $compCount; ?>,<?php echo $in_counter; ?>);" class="rb-delete-btn" title="Remove Ingredient">x</span></td>
                             </tr>
                             <?php 
                             $in_counter++; 
@@ -80,7 +80,7 @@
                                 <td><input type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_denominator[<?php echo $in_counter; ?>]"/></td>
                                 <td><input type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_name[<?php echo $in_counter; ?>]"/></td>
                                 <td><input class="rb_i_note" type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_extra[<?php echo $in_counter; ?>]"/></td>
-                                <td><span onclick="rbDeleteI(<?php echo $compCount; ?>,<?php echo $in_counter; ?>);" class="rb-delete-btn" title="Remove Ingredient" >-</span></td>
+                                <td><span onclick="rbDeleteI(<?php echo $compCount; ?>,<?php echo $in_counter; ?>);" class="rb-delete-btn" title="Remove Ingredient" >x</span></td>
                             </tr>           
                         </tbody>        
                     </table> 

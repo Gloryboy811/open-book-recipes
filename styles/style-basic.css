@@ -128,8 +128,47 @@ table.rb-times-table div div.rb-time-part {
 
 }
 
-h4.rb-comp-subtitle {
 
+h4.rb-comp-subtitle p {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.recipe-multiplier {
+    float: right;
+    border: 1px dotted;
+    border-radius: 30px;
+    box-sizing: border-box;
+    line-height: 0;
+}
+
+.recipe-multiplier .rb-rm-btn {
+    background-color: transparent;
+    border: none;
+    border-radius: 100px;
+}
+
+.recipe-multiplier .rb-rm-btn:hover {
+    color: var(--wp--preset--color--contrast-2);
+    cursor: pointer;
+}
+
+.recipe-multiplier .rb-rm-btn.-selected {
+    text-align: center;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    margin: 0;
+    border: 1px solid;
+    background-color: var(--wp--preset--color--contrast-2);
+    color: var(--wp--preset--color--base);
+    padding: 0;
+}
+
+.recipe-multiplier .rb-rm-btn span {
+    font-size: 0.75em;
+    font-weight: bold;
 }
 
 .rb-comp-ing {

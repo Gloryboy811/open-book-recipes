@@ -104,41 +104,42 @@
                 $multi = true;
             } 
         }
-        
-            
+
         foreach($components as $component) {
             if ($component == null) {
                 continue;
-            } 
-            
-
-            if ($multi) {
-                echo '<h4 class="rb-comp-subtitle">'.$component->title.'</h4>';
-            } else {
-                echo '<h4 class="rb-comp-subtitle">Ingredients</h4>';
-            }
-
-            echo '<div class="rb-comp-ing">';
-            ?>
-            <table class="rb-basic-ing-list">
-            <?php 
-                foreach ($component->ingredients as $objInfo) 
-                { 
-                ?>
-                <tr>
-                    <td>
-                        <b><?php echo toFrac($objInfo->amount) ?></b> <?php echo $objInfo->denom; ?>
-                    </td>
-                    <td>
-                        <?php echo $objInfo->title; ?> <i><?php echo $objInfo->extra ?></i>
-                    </td>
-                </tr>
+            } ?>
+            <h4 class="rb-comp-subtitle"><?php
+                if ($multi) {
+                    echo $component->title;
+                } else {
+                    echo '<p>Ingredients</p>';
+                } ?><div class="recipe-multiplier">
+                <button class="rb-rm-btn" data-multi="0.5"><span>x</span>½</button>
+                <button class="rb-rm-btn -selected" data-multi="1"><span>x</span>1</button>
+                <button class="rb-rm-btn" data-multi="2"><span>x</span>2</button>
+                <button class="rb-rm-btn" data-multi="4"><span>x</span>4</button>
+            </div>
+            </h4>
+            <div class="rb-comp-ing">
+                <table class="rb-basic-ing-list">
                 <?php 
-                } ?>
-            </table>
-            
+                    foreach ($component->ingredients as $objInfo) 
+                    { 
+                    ?>
+                    <tr>
+                        <td>
+                            <b class="rb-rm-amount" data-amount="<?php echo $objInfo->amount; ?>"><?php echo toFrac($objInfo->amount); ?></b> <?php echo $objInfo->denom; ?>
+                        </td>
+                        <td>
+                            <?php echo $objInfo->title; ?> <i><?php echo $objInfo->extra ?></i>
+                        </td>
+                    </tr>
+                    <?php 
+                    } ?>
+                </table>
+            </div>
             <?php
-                echo '</div>';
             }        
         ?> 
     </div>
