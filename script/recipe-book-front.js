@@ -74,6 +74,11 @@ var toMixedFractionStr = (top, bottom) => {
         return wholeNumber;
     } 
 
+    while (top % 2 == 0 && bottom % 2 == 0) {
+        top = top / 2;
+        bottom = bottom / 2;
+    }
+
     var niceFrac = strToFrac(`${top}/${bottom}`);
 
     if (wholeNumber == 0) {
