@@ -1,4 +1,6 @@
 <?php
+
+
 /* Template Name: Archive Page Custom */
 get_header(); ?>
 <link href="<?php echo recipebook_url; ?>/styles/style-archive.css?<?php echo (rand()); ?>" rel="stylesheet" type="text/css" />
@@ -9,11 +11,14 @@ get_header(); ?>
 									<h1 class="archive-title"><span class="color-accent">Recipes</span></h1>
 				
 				
+              
+
 			</div><!-- .archive-header-inner -->
 
 		</header>
 <div class="container">
 
+      
   
       <main id="main" class="rb-recipe-list" role="main">
         
@@ -28,4 +33,4 @@ get_header(); ?>
 
 </div><!-- .container -->
 
-<?php get_footer(); ?>
+<?php //get_footer(); ?>

@@ -138,13 +138,16 @@ class RecipeBook_Admin {
         }
     
             delete_post_meta($post_id, '_rb_recipe_components');
+            if (!isset($_POST['rb_components'])) {
+                return;
+            }
             foreach ($_POST['rb_components'] as $key => $value) {
                 //do something
                 $newComponentJson = '{ "title": "'.$value.'", "ingredients": [';
                         
                 foreach ($_POST['rb_component'.$key.'_rb_ingredient_name'] as $i => $title) {
                     //do something
-                    if ($title == '' && $$_POST['rb_component'.$key.'_rb_ingredient_extra'][$i] == '') continue;
+                    if ($title == '') continue;
 
                     $amountConv = recipebook_amount_fraction_convert($_POST['rb_component'.$key.'_rb_ingredient_amount'][$i]);
 
@@ -192,8 +195,13 @@ class RecipeBook_Admin {
 
             //recipe nut info
             //rb_n_t //rb_n_a
-            update_post_meta( $post_id, '_rb_nut_titles', $_POST['rb_n_t'] );   
-            update_post_meta( $post_id, '_rb_nut_amounts', $_POST['rb_n_a'] );   
+            if (isset($_POST['rb_n_t'])) {
+               update_post_meta( $post_id, '_rb_nut_titles', $_POST['rb_n_t'] );   
+            }
+            if (isset($_POST['rb_n_a'])) {
+               update_post_meta( $post_id, '_rb_nut_amounts', $_POST['rb_n_a'] );   
+            }
+              
 
     }
     

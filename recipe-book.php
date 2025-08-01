@@ -55,6 +55,9 @@ function recipebook_custom_type() {
 	);
 
 	register_post_type( 'recipes', $args );
+
+	/*add_filter('single_template', array('recipes','create_single_template'));
+	add_filter('archive_template', array('recipes','create_archive_template'));*/
 }
 
 add_action( 'init', 'recipebook_custom_type', 0 );
@@ -117,6 +120,41 @@ function recipe_tax_init() {
 }
 add_action( 'init', 'recipe_tax_init' );
 
+// blocki type stuff
+
+/*function my_plugin_register_block_template_paths( $paths ) {
+    $plugin_template_path = plugin_dir_path( __FILE__ ) . DIRECTORY_SEPARATOR . 'templates/';
+    if ( is_array( $paths ) ) {
+        $paths[] = $plugin_template_path;
+    }
+    return $paths;
+}
+add_filter( 'block_template_paths', 'my_plugin_register_block_template_paths' );*/
+
+function my_plugin_register_recipes_template() {
+    $post_type = 'recipes';
+
+    $templates = [
+        [
+			'title'		  => 'Recipes Archive',
+            'description' => 'The archive page for the recipes',
+            'post_types'  => [ $post_type ],
+			'content'	  => '<h1>hello</h1>',
+			'plugin'      => 'single-recipes'
+        ],
+    ];
+
+    foreach ( $templates as $template ) {
+        register_block_template(
+            'Recipes Templates',
+            $template
+        );
+    }
+}
+add_action( 'init', 'my_plugin_register_recipes_template' );
+
+
+// end block stuff
 
 add_filter( 'the_content', 'add_recipe_info', 1 );
 
@@ -164,12 +202,12 @@ add_action( 'wp_enqueue_scripts', 'my_javascripts' );
 
 
 /* Filter the single_template with our custom function*/
-/*add_filter('single_template', 'my_custom_template');
+/*add_filter('single_template', 'my_custom_template');*/
 
-ob_get_contents() - Return the contents of the output buffer
-ob_clean() - Clean (erase) the contents of the active output buffer
-ob_end_clean() - Clean (erase) the contents of the active output buffer and turn it off
-ob_get_flush() - F
+ob_get_contents();// - Return the contents of the output buffer
+ob_clean();// - Clean (erase) the contents of the active output buffer
+ob_end_clean();// - Clean (erase) the contents of the active output buffer and turn it off
+ob_get_flush();// - F
 
 function my_custom_template($single) {
 
@@ -186,7 +224,7 @@ function my_custom_template($single) {
     }
     return $single;
 
-}*/
+}
 
 /*add_filter('template_include', 'recipes_template');
 
@@ -201,9 +239,7 @@ function recipes_template( $template ) {
     }
   }
   return $template;
-}
-*/
-
+}*/
 
 function my_rewrite_flush() {
     recipe_tax_init();
@@ -252,5 +288,6 @@ function toFrac($num) {
 
 	return $num;
 }
+
 // include_once('admin/settings.php');
 include_once('admin/admin-main.php');

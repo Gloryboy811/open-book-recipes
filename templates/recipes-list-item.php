@@ -29,7 +29,11 @@
                             ?>
                             <div style="background-image: url('<?php echo $mainImg; ?>')"></div>
                             <?php
-                        } 
+                        } else {
+                            ?>
+                            <div style="background-image: url('<?php echo recipebook_url; ?>'/images/recipe_noimage.jpg)"></div>
+                            <?php
+                        }
                     ?>
                 </div>
             </div>
