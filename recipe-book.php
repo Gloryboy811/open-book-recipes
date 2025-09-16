@@ -3,7 +3,7 @@
  * Plugin Name: Open Book Recipes
  * Plugin URI: https://github.com/Gloryboy811/open-book-recipes
  * Description: Open Book Recipes
- * Version: 0.0.1
+ * Version: 0.1.1
  * Author: Matthew Hughes
  * Author URI: http://www.MatthewHughes.co.za
  */
@@ -34,24 +34,26 @@ function recipebook_custom_type() {
 	);
 
 	$args = array(
-		'label'               => __( 'recipes', 'recipebook' ),
-		'description'         => __( 'Recipes', 'recipebook' ),
-		'labels'              => $labels,
-		'supports'            => array( 'title', 'editor', 'excerpt', 'thumbnail'),
-		'hierarchical'        => false,
-		'public'              => true,
-		'show_ui'             => true,
-		'show_in_menu'        => true,
-		'show_in_nav_menus'   => true,
-		'show_in_admin_bar'   => true,
-		'menu_position'       => 7,
-        'taxonomies'          => array('mealtime','occasion','cuisine'),
-        'menu_icon'           => 'dashicons-book-alt',
-		'can_export'          => true,
-		'has_archive'         => true,
-		'exclude_from_search' => false,
-		'publicly_queryable'  => true,
-		'capability_type'     => 'page',
+		'label'             	=> __( 'recipes', 'recipebook' ),
+		'description'       	=> __( 'Recipes', 'recipebook' ),
+		'labels'            	=> $labels,
+		'supports'          	=> array( 'title', 'editor', 'excerpt', 'thumbnail', 'taxonomies'),
+		'hierarchical'      	=> false,
+		'public'            	=> true,
+		'show_ui'           	=> true,
+		'show_in_menu'      	=> true,
+		'show_in_nav_menus' 	=> true,
+		'show_in_admin_bar'		=> true,
+		'show_in_rest'			=> true,
+		'query_var'				=> true,
+		'menu_position'     	=> 7,
+        'taxonomies'        	=> array('mealtime', 'cuisine'),
+        'menu_icon'         	=> 'dashicons-book-alt',
+		'can_export'			=> true,
+		'has_archive'         	=> true,
+		'exclude_from_search'	=> false,
+		'publicly_queryable'  	=> true,
+		'capability_type'     	=> 'page',
 	);
 
 	register_post_type( 'recipes', $args );
@@ -64,31 +66,35 @@ add_action( 'init', 'recipebook_custom_type', 0 );
 
 function recipe_tax_init() {
     
-    register_taxonomy(
-		'mealtime',
-		'recipes',
-		array(
-			'label' => __( 'Mealtime' ),
-            'labels' => getTaxLabel('Meal Type'),
-			'rewrite' => array( 'slug' => 'mealtime' ),
-			'hierarchical' => true,
-            'description' => 'What meal type is this recipe suited for?',
-            'public' => true
-		)
+	$args = array(
+		'label' 				=> __( 'Mealtime' ),
+		'labels' 				=> getTaxLabel('Meal Type'),
+		'rewrite' 				=> array( 'slug' => 'mealtime' ),
+		'hierarchical' 			=> true,
+		'description'			=> 'What meal type is this recipe suited for?',
+		'public' 				=> true,
+		'show_in_rest'			=> true,
+		'show_ui'				=> true,
+		'show_admin_column'		=> true,
+		'query_var'				=> true,
+		'rewrite'				=> [ 'slug' => 'mealtime' ],
 	);
+	register_taxonomy( 'mealtime', [ 'recipes' ], $args );
 
-    register_taxonomy(
-		'cuisine',
-		'recipes',
-		array(
-			'label' => __( 'Cuisine' ),
-            'labels' => getTaxLabel('Cuisine'),
-			'rewrite' => array( 'slug' => 'cuisine' ),
-			'hierarchical' => true,
-            'description' => 'What cuisine is this recipe part of?',
-            'public' => true
-		)
+
+	$args2 = array(
+			'label'				 => __( 'Cuisine' ),
+            'labels' 			=> getTaxLabel('Cuisine'),
+			'rewrite' 			=> array( 'slug' => 'cuisine' ),
+			'hierarchical' 		=> true,
+            'description' 		=> 'What cuisine is this recipe part of?',
+            'public' 			=> true,
+			'show_in_rest'		=> true,
+			'show_ui'			=> true,
+			'show_admin_column'	=> true,
+			'query_var'			=> true,
 	);
+    register_taxonomy('cuisine', [ 'recipes' ], $args2 );
 
     // register_taxonomy(
 	// 	'ingredient',
@@ -120,41 +126,6 @@ function recipe_tax_init() {
 }
 add_action( 'init', 'recipe_tax_init' );
 
-// blocki type stuff
-
-/*function my_plugin_register_block_template_paths( $paths ) {
-    $plugin_template_path = plugin_dir_path( __FILE__ ) . DIRECTORY_SEPARATOR . 'templates/';
-    if ( is_array( $paths ) ) {
-        $paths[] = $plugin_template_path;
-    }
-    return $paths;
-}
-add_filter( 'block_template_paths', 'my_plugin_register_block_template_paths' );*/
-
-function my_plugin_register_recipes_template() {
-    $post_type = 'recipes';
-
-    $templates = [
-        [
-			'title'		  => 'Recipes Archive',
-            'description' => 'The archive page for the recipes',
-            'post_types'  => [ $post_type ],
-			'content'	  => '<h1>hello</h1>',
-			'plugin'      => 'single-recipes'
-        ],
-    ];
-
-    foreach ( $templates as $template ) {
-        register_block_template(
-            'Recipes Templates',
-            $template
-        );
-    }
-}
-add_action( 'init', 'my_plugin_register_recipes_template' );
-
-
-// end block stuff
 
 add_filter( 'the_content', 'add_recipe_info', 1 );
 
@@ -176,13 +147,11 @@ function add_recipe_info($content) {
 		$the_content = $content;
 
 		ob_start();
-			include_once($content_file);
-			echo '<style>'.$options['custom_css'].'</style>';
+		include_once($content_file);
+		echo '<style>'.$options['custom_css'].'</style>';
 		$content = ob_get_clean();
 		$content = str_replace("    ", '', $content);
 		$content = str_replace(array("<p></p>", "\r", "\n"), '', $content);
-		//echo '<this>'.$content.'</this>';
-
 	}
 	
 	return $content;
@@ -190,56 +159,19 @@ function add_recipe_info($content) {
 
 
 function my_javascripts() {
-    /*$script_file =  dirname( __FILE__ )  . DIRECTORY_SEPARATOR . 'script' . DIRECTORY_SEPARATOR . 'recipe-book-front.js';
-	echo "<script>";
-		include_once($script_file);
-	echo "</script>";*/
-
-	$script_fil2e =  recipebook_url . 'script' . DIRECTORY_SEPARATOR . 'recipe-book-front.js';
-    wp_enqueue_script( 'recipe-book-front', $script_fil2e);
+	$script_file =  recipebook_url . 'script' . DIRECTORY_SEPARATOR . 'recipe-book-front.js';
+    wp_enqueue_script( 'recipe-book-front', $script_file);
 }
 add_action( 'wp_enqueue_scripts', 'my_javascripts' );
 
 
 /* Filter the single_template with our custom function*/
-/*add_filter('single_template', 'my_custom_template');*/
 
 ob_get_contents();// - Return the contents of the output buffer
 ob_clean();// - Clean (erase) the contents of the active output buffer
 ob_end_clean();// - Clean (erase) the contents of the active output buffer and turn it off
 ob_get_flush();// - F
 
-function my_custom_template($single) {
-
-    global $post;
-
-    // Checks for single template by post type 
-    if ( $post->post_type == 'recipes' ) {
-		$file =  dirname( __FILE__ )  . DIRECTORY_SEPARATOR .'single-recipes.php';
-        if ( file_exists($file  ) ) {
-            return $file ;
-        } else {
-			die($file.'NOT FOUND');
-		}
-    }
-    return $single;
-
-}
-
-/*add_filter('template_include', 'recipes_template');
-
-function recipes_template( $template ) {
-  if ( is_post_type_archive('recipes') ) {
-    $theme_files = array('archive-recipes.php', 'recipe-book/archive-recipes.php');
-    $exists_in_theme = locate_template($theme_files, false);
-    if ( $exists_in_theme != '' ) {
-      return $exists_in_theme;
-    } else {
-      return plugin_dir_path(__FILE__) . 'archive-recipes.php';
-    }
-  }
-  return $template;
-}*/
 
 function my_rewrite_flush() {
     recipe_tax_init();
@@ -278,12 +210,6 @@ function showJsonString($value) {
 function toFrac($num) {
 	$frac = ['½', '⅓','⅔','¼','¾','⅛','⅜','⅝','⅞'];
 	$str = ['1/2', '1/3','2/3','1/4','3/4','1/8','3/8','5/8','7/8'];
-	/*
-	$s = array_search($num, $str);
-	if ($s !== false) {
-		return $frac[$s];
-	}*/
-
 	$num = str_replace($str, $frac, $num);
 
 	return $num;

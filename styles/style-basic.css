@@ -75,8 +75,8 @@ ul.rb-details-list {
 }
 
 ul.rb-details-list li {
-    background-color: var(--wp--preset--color--contrast-2);
-    color: var(--wp--preset--color--base);
+    background-color: var(--rb-accent-color);
+    color: var(--rb-accent-color-base);
     border-radius: 100px;
     padding: 5px 21px;
     font-size: 0.8em;
@@ -87,7 +87,7 @@ ul.rb-details-list li + li {
 }
 
 ul.rb-details-list li a {
-    color: var(--wp--preset--color--base);
+    color: var(--rb-accent-color-base);
 }
 
 h1.rb-recipe-title {
@@ -150,7 +150,7 @@ h4.rb-comp-subtitle p {
 }
 
 .recipe-multiplier .rb-rm-btn:hover {
-    color: var(--wp--preset--color--contrast-2);
+    color: var(--rb-accent-color);
     cursor: pointer;
 }
 
@@ -161,8 +161,8 @@ h4.rb-comp-subtitle p {
     line-height: 24px;
     margin: 0;
     border: 1px solid;
-    background-color: var(--wp--preset--color--contrast-2);
-    color: var(--wp--preset--color--base);
+    background-color: var(--rb-accent-color);
+    color: var(--rb-accent-color-base);
     padding: 0;
 }
 
@@ -196,7 +196,7 @@ table.rb-basic-ing-list td:nth-child(1) {
     width: 15%;
     
     border: none;
-    border-right: 4px solid var(--wp--preset--color--contrast-2);
+    border-right: 4px solid var(---rb-accent-color);
     text-align: right;
     font-size: 14px;
     /* color: var(--wp--preset--color--contrast-2); */
@@ -220,10 +220,10 @@ ol.rb-basic-steps div p {
 }
 
 div.rb-notes {
-    border-top: 1px solid var(--wp--preset--color--contrast-2);;
+    border-top: 1px solid var(--rb-accent-color);;
     padding: 20px 10px;
     margin: 30px 0 0 0;
-    color: var(--wp--preset--color--contrast-2);
+    color: var(--rb-accent-color);
     font-style: italic;
 }
 

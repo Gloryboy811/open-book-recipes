@@ -2,8 +2,14 @@
 
     $detailsJson = get_post_meta( $post->ID, '_rb_recipe_details', true );
     $details = json_decode( $detailsJson.'' );
-
+    $options = get_option( 'recipebook_settings' ); 
 ?>
+    <style>
+        :root {
+        --rb-accent-color: <?php echo isset($options['accent_color']) ? esc_attr($options['accent_color']) : '#ff9800'; ?>; 
+        --rb-accent-color-base: <?php echo isset($options['accent_color_base']) ? esc_attr($options['accent_color_base']) : '#92621a'; ?>;
+        }
+    </style>
     <link href="<?php echo recipebook_url; ?>/styles/style-basic.css?<?php echo (rand()); ?>" rel="stylesheet" type="text/css" />
     <div class="rb-title-block">
         <div class="rb-title-footer">
@@ -104,7 +110,6 @@
                 $multi = true;
             } 
         }
-
         foreach($components as $component) {
             if ($component == null) {
                 continue;
@@ -114,12 +119,13 @@
                     echo $component->title;
                 } else {
                     echo '<p>Ingredients</p>';
-                } ?><div class="recipe-multiplier">
-                <button class="rb-rm-btn" data-multi="0.5"><span>x</span>½</button>
-                <button class="rb-rm-btn -selected" data-multi="1"><span>x</span>1</button>
-                <button class="rb-rm-btn" data-multi="2"><span>x</span>2</button>
-                <button class="rb-rm-btn" data-multi="4"><span>x</span>4</button>
-            </div>
+                } ?>
+                <div class="recipe-multiplier">
+                    <button class="rb-rm-btn" data-multi="0.5"><span>x</span>½</button>
+                    <button class="rb-rm-btn -selected" data-multi="1"><span>x</span>1</button>
+                    <button class="rb-rm-btn" data-multi="2"><span>x</span>2</button>
+                    <button class="rb-rm-btn" data-multi="4"><span>x</span>4</button>
+                </div>
             </h4>
             <div class="rb-comp-ing">
                 <table class="rb-basic-ing-list">
@@ -138,11 +144,11 @@
                     <?php 
                     } ?>
                 </table>
-            </div>
+            </div> <?php /* END of components */ ?>
             <?php
             }        
         ?> 
-    </div>
+    </div> <?php /* END of  */ ?>
     <div class="rb-basic-content-block">   
         <?php 
             $steps = get_post_meta( $post->ID, '_rb_recipe_steps', false );
@@ -170,38 +176,37 @@
             $detailsNutTitles = get_post_meta( $post->ID, '_rb_nut_titles', true );
             $detailsNutAmounts = get_post_meta( $post->ID, '_rb_nut_amounts', true );
         ?>
-            <table class="rb-nutrients">
-                <thead>
-                    <tr ><?php
-                    if(is_array($detailsNutTitles)) {
-                        foreach($detailsNutTitles as $key => $value) {
-                            echo '<th>'.$value.'</th>';
-                        }
+        <table class="rb-nutrients">
+            <thead>
+                <tr ><?php
+                if(is_array($detailsNutTitles)) {
+                    foreach($detailsNutTitles as $key => $value) {
+                        echo '<th>'.$value.'</th>';
                     }
-                ?></tr>
-                </thead>
-                <tbody>
-                    <tr><?php
-                    if(is_array($detailsNutTitles)) {
-                        foreach($detailsNutAmounts as $key => $value) {
-                            echo '<td>'.$value.'</td>';
-                        }
+                }
+            ?></tr>
+            </thead>
+            <tbody>
+                <tr><?php
+                if(is_array($detailsNutTitles)) {
+                    foreach($detailsNutAmounts as $key => $value) {
+                        echo '<td>'.$value.'</td>';
                     }
-                ?></tr>
-                </tbody>
-            </table>
-        </div>
-        <ul class="rb-gallery-list"><?php 
-        $gallery_pics = get_post_meta($post->ID, 'gallery_images', true);
-        if (is_array($gallery_pics)) {
-            foreach($gallery_pics as $key => $pic) {
-            $image_attributes = wp_get_attachment_image_src( $pic, 'full' ); 
-            ?><li>
-                <a href="<?php echo $image_attributes[0]; ?>" target="_blank">
-                    <span class="rb-square-img" style="background-image: url('<?php echo $image_attributes[0]; ?>')"></span>
-                </a>
-            </li><?php
-            }
-        } 
-        ?></ul>
+                }
+            ?></tr>
+            </tbody>
+        </table>
     </div>
+    <ul class="rb-gallery-list"><?php 
+    $gallery_pics = get_post_meta($post->ID, 'gallery_images', true);
+    if (is_array($gallery_pics)) {
+        foreach($gallery_pics as $key => $pic) {
+        $image_attributes = wp_get_attachment_image_src( $pic, 'full' ); 
+        ?><li>
+            <a href="<?php echo $image_attributes[0]; ?>" target="_blank">
+                <span class="rb-square-img" style="background-image: url('<?php echo $image_attributes[0]; ?>')"></span>
+            </a>
+        </li><?php
+        }
+    } 
+    ?></ul>

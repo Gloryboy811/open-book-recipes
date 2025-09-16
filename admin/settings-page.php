@@ -116,30 +116,47 @@
                 </td>
             </tr>
             <tr>
+                <th scope="row">Accent Colours</th>
+                <td>
+                    Accent:
+                    <fieldset>
+                        <input type="color" name="recipebook_settings[accent_color]" value="<?php echo isset($options['accent_color']) ? esc_attr($options['accent_color']) : '#ff9800'; ?>" />
+                        <span style="margin-left:10px;">Preview: <span style="display:inline-block;width:24px;height:24px;background:<?php echo isset($options['accent_color']) ? esc_attr($options['accent_color']) : '#ff9800'; ?>;border:1px solid #ccc;"></span></span>
+                    </fieldset>
+                    &nbsp; Base:
+                    <fieldset>
+                        <input type="color" name="recipebook_settings[accent_color_base]" value="<?php echo isset($options['accent_color_base']) ? esc_attr($options['accent_color_base']) : '#a0650dff'; ?>" />
+                        <span style="margin-left:10px;">Preview: <span style="display:inline-block;width:24px;height:24px;background:<?php echo isset($options['accent_color_base']) ? esc_attr($options['accent_color_base']) : '#ff9800'; ?>;border:1px solid #ccc;"></span></span>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
                 <th scope="row">Custom CSS</th>
                 <td>
                     <fieldset>
-                        <pre id="editor"  style="height: 500px; width: 100%"></pre>
-                        <textarea name="recipebook_settings[custom_css]"><?php 
-                            echo $options['custom_css']; 
-                        ?></textarea>
+                        <pre id="editor" style="height: 500px; width: 100%" name="recipebook_settings[custom_css]"></pre>
+<textarea name="recipebook_settings[custom_css]" style="display:none;"><?php 
+    echo isset($options['custom_css']) ? esc_textarea($options['custom_css']) : ''; 
+?></textarea>
                     </fieldset>
                 </td>
             </tr>
         </table>
-        
-        <input type="submit" class="button button-primaryr" value="Update Settings" />
+        <input type="submit" class="button button-primary" value="Update Settings" />
     </form>
         
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js"></script>
     <script>
+    jQuery(document).ready(function($){
         var editor = ace.edit("editor");
         editor.session.setMode("ace/mode/css");
         editor.setTheme("ace/theme/monokai");
-        var textarea = $('textarea[name="recipebook_settings[custom_css]"]').hide();
-        editor.getSession().setValue(textarea.val());
-        editor.getSession().on('change', function(){
-            textarea.val(editor.getSession().getValue());
+        var textarea = $('textarea[name="recipebook_settings[custom_css]"]');
+        editor.setValue(textarea.val(), -1); // -1 moves cursor to start
+        editor.session.on('change', function(){
+            textarea.val(editor.getValue());
         });
+    });
     </script>
 </div>
