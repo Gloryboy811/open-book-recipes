@@ -79,7 +79,6 @@ ul.rb-details-list li {
     color: var(--rb-accent-color-base);
     border-radius: 100px;
     padding: 5px 21px;
-    font-size: 0.8em;
 }
 
 ul.rb-details-list li + li {
@@ -196,7 +195,7 @@ table.rb-basic-ing-list td:nth-child(1) {
     width: 15%;
     
     border: none;
-    border-right: 4px solid var(---rb-accent-color);
+    border-right: 4px solid var(--rb-accent-color);
     text-align: right;
     font-size: 14px;
     /* color: var(--wp--preset--color--contrast-2); */
