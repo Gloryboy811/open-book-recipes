@@ -58,11 +58,12 @@
         <?php
             $timesJson = get_post_meta( $post->ID, '_rb_recipe_times', true );
             $times = json_decode( $timesJson.'' );
-            if ($times) {
+            if ($times && ($times->prepHrs || $times->prepMins || $times->cookHrs || $times->cookMins || $times->totalHrs || $times->totalMins)) {
         ?>
 
         <table class="rb-times-table">
             <tr>
+                <?php if ($times->prepHrs || $times->prepMins ) { ?>
                 <td>
                     <h3>Prep Time</h3>
                     <div class="rb-time-amount"><?php 
@@ -73,6 +74,10 @@
                                 echo '<div class="rb-time-part">'.$times->prepMins.'<span>m</span></div>';
                     ?></div>
                 </td>
+                <?php 
+                }
+                if ($times->cookHrs || $times->cookMins ) {
+                ?>
                 <td>
                     <h3>Cook Time</h3>
                     <div class="rb-time-amount"><?php 
@@ -83,6 +88,10 @@
                                 echo '<div class="rb-time-part">'.$times->cookMins.'<span>m</span>';
                     ?></div>
                 </td>
+                 <?php 
+                }
+                if ($times->totalHrs || $times->totalMins ) {
+                ?>
                 <td>
                     <h3>Total Time</h3>
                     <div class="rb-time-amount">
@@ -96,6 +105,7 @@
                         ?>  
                     </div>
                 </td>
+                 <?php } ?>
             </tr>
         </table>
     <?php } ?> 

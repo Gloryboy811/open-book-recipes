@@ -215,5 +215,13 @@ function toFrac($num) {
 	return $num;
 }
 
+/**
+ * Change the Continue Reading text on Blog Post Entries
+ */
+function myprefix_post_readmore_link_text() {
+	return 'View Recipe';
+}
+add_filter( 'ocean_post_continue_reading', 'myprefix_post_readmore_link_text' );
+
 // include_once('admin/settings.php');
 include_once('admin/admin-main.php');
