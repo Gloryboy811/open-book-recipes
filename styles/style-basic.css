@@ -120,7 +120,7 @@ table.rb-times-table h3 {
 }
 
 table.rb-times-table div div.rb-time-part {
-
+    display: inline-block;
 }
 
 .rb-time-amount {
@@ -231,6 +231,7 @@ table.rb-nutrients {
     min-width: 100%;
     border-radius: 10px;
     text-align: center;
+    margin: 0;
 }
 
 table.rb-nutrients td, table.rb-nutrients th {
