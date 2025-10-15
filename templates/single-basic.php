@@ -11,6 +11,14 @@
         }
     </style>
     <link href="<?php echo recipebook_url; ?>/styles/style-basic.css?<?php echo (rand()); ?>" rel="stylesheet" type="text/css" />
+    
+    <?php $post_body = get_the_content(); 
+    
+    if ($post_body) {
+        echo $post_body;
+        ?><hr/><?php
+    }
+    ?>
     <div class="rb-title-block">
         <div class="rb-title-footer">
             <?php if($details) { ?>
