@@ -11,6 +11,13 @@ var muiltiplyAmounts = (multi) => {
 }
 
 var multiplyFullNumber = (numberString, multi) => {
+    if (isNaN(numberString)) {
+        if (numberString) {
+            return multi+" "+numberString;
+        } else {
+            return "";
+        }
+    }
     var parts = numberString.split(' ');
     var top = 0;
     var divisor = 1;

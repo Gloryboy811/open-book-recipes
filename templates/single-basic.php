@@ -153,7 +153,7 @@
                     ?>
                     <tr>
                         <td>
-                            <b class="rb-rm-amount" data-amount="<?php echo $objInfo->amount; ?>"><?php echo toFrac($objInfo->amount); ?></b> <?php echo $objInfo->denom; ?>
+                            <b class="rb-rm-amount" data-amount="<?php echo trim($objInfo->amount); ?>"><?php echo toFrac($objInfo->amount); ?></b> <?php echo $objInfo->denom; ?>
                         </td>
                         <td>
                             <?php echo $objInfo->title; ?> <i><?php echo $objInfo->extra ?></i>
