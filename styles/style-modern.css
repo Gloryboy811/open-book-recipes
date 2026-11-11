@@ -1,7 +1,15 @@
 /* Modern recipe layout. Mobile-first, theme-friendly and scoped to .rb-modern. */
+
+/* The recipe hero replaces the active theme's own featured image and title. */
+body.rb-modern-recipe .thumbnail,
+body.rb-modern-recipe .entry-header,
+body.rb-modern-recipe .post-thumb,
+body.rb-modern-recipe .post-thumbnail {
+    display: none !important;
+}
 .rb-modern {
     --rbm-ink: #25352f;
-    --rbm-accent: #b65b3c;
+    --rbm-accent: #98452f;
     --rbm-muted: #68736d;
     --rbm-line: #e8e8e2;
     --rbm-surface: #f7f7f3;
@@ -282,11 +290,41 @@
     .rbm-gallery img { transition: none; }
 }
 
-.rbm-modern a:focus-visible,
-.rbm-modern button:focus-visible {
+.rb-modern a:focus-visible,
+.rb-modern button:focus-visible {
     outline: 3px solid var(--rbm-accent);
     outline-offset: 3px;
 }
 .rbm-chip-link:hover { border-color: var(--rbm-accent); color: var(--rbm-accent); }
 .rbm-multiplier .rb-rm-btn:hover { color: var(--rbm-accent); }
 .rbm-multiplier .rb-rm-btn.-selected:hover { color: #fff; }
+
+
+/* Keep recipe copy readable even when the site's global palette is very pale. */
+.rb-modern {
+    --rbm-ink: #25352f;
+    --rbm-accent: #98452f;
+    --rbm-muted: #59645e;
+    color: #25352f !important;
+}
+.rb-modern p,
+.rb-modern li,
+.rb-modern td,
+.rb-modern th,
+.rb-modern strong,
+.rb-modern b,
+.rb-modern .rbm-ingredient-name,
+.rb-modern .rbm-step-list li > div {
+    color: #25352f;
+}
+.rb-modern .rbm-eyebrow,
+.rb-modern .rbm-ingredient-amount {
+    color: #98452f;
+}
+.rb-modern .rbm-hero,
+.rb-modern .rbm-hero-content,
+.rb-modern .rbm-hero .rbm-eyebrow,
+.rb-modern .rbm-hero .rbm-title,
+.rb-modern .rbm-hero .rbm-intro {
+    color: #fff;
+}
