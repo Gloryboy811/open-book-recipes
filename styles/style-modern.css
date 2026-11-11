@@ -281,3 +281,12 @@
 @media (prefers-reduced-motion: reduce) {
     .rbm-gallery img { transition: none; }
 }
+
+.rbm-modern a:focus-visible,
+.rbm-modern button:focus-visible {
+    outline: 3px solid var(--rbm-accent);
+    outline-offset: 3px;
+}
+.rbm-chip-link:hover { border-color: var(--rbm-accent); color: var(--rbm-accent); }
+.rbm-multiplier .rb-rm-btn:hover { color: var(--rbm-accent); }
+.rbm-multiplier .rb-rm-btn.-selected:hover { color: #fff; }
