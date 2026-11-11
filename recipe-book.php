@@ -129,6 +129,27 @@ add_action( 'init', 'recipe_tax_init' );
 
 add_filter( 'the_content', 'add_recipe_info', 1 );
 
+/**
+ * Mark modern recipe pages so the active theme's duplicate title and
+ * featured-image presentation can be hidden without affecting other layouts.
+ */
+function recipebook_modern_recipe_body_class( $classes ) {
+    if ( ! is_singular( 'recipes' ) ) {
+        return $classes;
+    }
+
+    $options = get_option( 'recipebook_settings', array() );
+    $theme = isset( $options['layout_theme'] ) ? sanitize_key( $options['layout_theme'] ) : 'basic';
+
+    if ( 'modern' === $theme ) {
+        $classes[] = 'rb-modern-recipe';
+    }
+
+    return $classes;
+}
+add_filter( 'body_class', 'recipebook_modern_recipe_body_class' );
+
+
 function recipebook_load_archive_template( $template ) {
     if ( is_post_type_archive( 'recipes' ) ) {
         $plugin_template = plugin_dir_path( __FILE__ ) . 'archive-recipes.php';
