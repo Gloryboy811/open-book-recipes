@@ -17,11 +17,11 @@
         <table>
             <tr>
                 <td>
-                    <input type="number" name="rb_prep_hrs" id="rb_prep_hrs" min="0" max="72" value="<?php echo $times ? $times->prepHrs : ''; ?>" />
+                    <input type="number" name="rb_prep_hrs" id="rb_prep_hrs" min="0" max="72" value="<?php echo esc_attr( $times ? $times->prepHrs : '' ); ?>" />
                     <label for="rb_prep_hrs" class="rb-dd-label">hrs</label>
                 </td>
                 <td>
-                    <input type="number" name="rb_prep_mins" id="rb_prep_mins" min="0" max="59" value="<?php echo $times ? $times->prepMins : ''; ?>" />
+                    <input type="number" name="rb_prep_mins" id="rb_prep_mins" min="0" max="59" value="<?php echo esc_attr( $times ? $times->prepMins : '' ); ?>" />
                     <label for="rb_prep_mins" class="rb-dd-label">mins</label>
                 </td>
             </tr>
@@ -32,11 +32,11 @@
         <table>
             <tr>
                 <td>
-                    <input type="number" name="rb_cook_hrs" id="rb_cook_hrs" min="0" max="72" value="<?php echo $times ? $times->cookHrs : ''; ?>" />
+                    <input type="number" name="rb_cook_hrs" id="rb_cook_hrs" min="0" max="72" value="<?php echo esc_attr( $times ? $times->cookHrs : '' ); ?>" />
                     <label for="rb_cook_hrs" class="rb-dd-label">hrs</label>
                 </td>
                 <td>
-                    <input type="number" name="rb_cook_mins" id="rb_cook_mins" min="0" max="59" value="<?php echo $times ? $times->cookMins : ''; ?>" />
+                    <input type="number" name="rb_cook_mins" id="rb_cook_mins" min="0" max="59" value="<?php echo esc_attr( $times ? $times->cookMins : '' ); ?>" />
                     <label for="rb_cook_mins" class="rb-dd-label">mins</label>
                 </td>
             </tr>
@@ -47,11 +47,11 @@
         <table>
             <tr>
                 <td>
-                    <input type="number" name="rb_total_hrs" id="rb_total_hrs" min="0" max="72" value="<?php echo $times ? $times->totalHrs : ''; ?>" />
+                    <input type="number" name="rb_total_hrs" id="rb_total_hrs" min="0" max="72" value="<?php echo esc_attr( $times ? $times->totalHrs : '' ); ?>" />
                     <label for="rb_total_hrs" class="rb-dd-label">hrs</label>
                 </td>
                 <td>
-                    <input type="number" name="rb_total_mins" id="rb_total_mins" min="0" max="59" value="<?php echo $times ? $times->totalMins : ''; ?>" />
+                    <input type="number" name="rb_total_mins" id="rb_total_mins" min="0" max="59" value="<?php echo esc_attr( $times ? $times->totalMins : '' ); ?>" />
                     <label for="rb_total_mins" class="rb-dd-label">mins</label>
                 </td>
             <tr>
@@ -63,25 +63,25 @@
     <div class="col-sm-4">
         <div class="rb-meta-block">
             <label for="rb_d_calories">Calories Per Serving:</label>
-            <div class="labeled_input _label_right"><input type="number" name="rb_d_calories" id="rb_d_calories" value="<?php echo $details ? $details->cals : ''; ?>" /><label for="rb_d_calories">KCal</label></div>
+            <div class="labeled_input _label_right"><input type="number" name="rb_d_calories" id="rb_d_calories" value="<?php echo esc_attr( $details ? $details->cals : '' ); ?>" /><label for="rb_d_calories">KCal</label></div>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="rb-meta-block">
             <label for="rb_d_serves">Serves:</label>
-            <div class="labeled_input _label_right"><input type="number" name="rb_d_serves" id="rb_d_serves" value="<?php echo $details ? $details->serves : ''; ?>" /><label for="rb_d_serves">people</label></div>
+            <div class="labeled_input _label_right"><input type="number" name="rb_d_serves" id="rb_d_serves" value="<?php echo esc_attr( $details ? $details->serves : '' ); ?>" /><label for="rb_d_serves">people</label></div>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="rb-meta-block">
             <label for="rb_d_difficulty">Difficulty:</label>
-            <input type="text" placeholder="easy, difficult, etc" name="rb_d_difficulty" id="rb_d_difficulty" value="<?php echo $details ? $details->difficulty : ''; ?>" />
+            <input type="text" placeholder="easy, difficult, etc" name="rb_d_difficulty" id="rb_d_difficulty" value="<?php echo esc_attr( $details ? $details->difficulty : '' ); ?>" />
         </div>
     </div>
     <div class="col-sm-6">
         <div class="rb-meta-block">
             <label for="rb_d_url">Origin URL:</label>
-            <input type="text" placeholder="http://" name="rb_d_url" id="rb_d_url" value="<?php echo $details && isset($details->url) ? $details->url : ''; ?>" />
+            <input type="text" placeholder="http://" name="rb_d_url" id="rb_d_url" value="<?php echo esc_attr( $details && isset( $details->url ) ? $details->url : '' ); ?>" />
         </div>
     </div>
 </div>
@@ -96,14 +96,14 @@
         <tr id="rb_nut_title"><?php
             if(is_array($detailsNutTitles)) {
                 foreach($detailsNutTitles as $key => $value) {
-                    echo '<td><input name="rb_n_t['.$key.']" value="'.$value.'" tabindex="'.$key.'" /></td>';
+                    echo '<td><input name="rb_n_t[' . absint( $key ) . ']" value="' . esc_attr( $value ) . '" tabindex="' . absint( $key ) . '" /></td>';
                 }
             }
         ?></tr>
         <tr id="rb_nut_amount"><?php
             if(is_array($detailsNutAmounts)) {
                 foreach($detailsNutAmounts as $key => $value) {
-                    echo '<td><input name="rb_n_a['.$key.']" value="'.$value.'" tabindex="'.$key.'" /></td>';
+                    echo '<td><input name="rb_n_a[' . absint( $key ) . ']" value="' . esc_attr( $value ) . '" tabindex="' . absint( $key ) . '" /></td>';
                 }
             }
         ?></tr>
