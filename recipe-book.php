@@ -3,7 +3,7 @@
  * Plugin Name: Open Book Recipes
  * Plugin URI: https://github.com/Gloryboy811/open-book-recipes
  * Description: Open Book Recipes
- * Version: 0.1.2
+ * Version: 0.1.3
  * Author: Matthew Hughes
  * Author URI: http://www.MatthewHughes.co.za
  */
@@ -167,7 +167,7 @@ function add_recipe_info($content) {
 	if ( is_singular() && in_the_loop() && is_main_query() && $post->post_type == 'recipes' ) {
 
 		$options = get_option( 'recipebook_settings' );
-		$theme = isset( $options['layout_theme'] ) ? sanitize_key( $options['layout_theme'] ) : 'basic';
+		$theme = 'basic';
 
 		// check layout theme
 		$content_file =  dirname( __FILE__ )  . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'single-'.$theme.'.php';
@@ -195,7 +195,7 @@ function my_javascripts() {
         return;
     }
     $script_file = recipebook_url . 'script/recipe-book-front.js';
-    wp_enqueue_script( 'recipe-book-front', $script_file, array(), '0.1.2', true );
+    wp_enqueue_script( 'recipe-book-front', $script_file, array(), '0.1.3', true );
 }
 add_action( 'wp_enqueue_scripts', 'my_javascripts' );
 
