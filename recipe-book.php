@@ -3,7 +3,7 @@
  * Plugin Name: Open Book Recipes
  * Plugin URI: https://github.com/Gloryboy811/open-book-recipes
  * Description: Open Book Recipes
- * Version: 0.1.5
+ * Version: 0.1.3
  * Author: Matthew Hughes
  * Author URI: http://www.MatthewHughes.co.za
  */
@@ -129,6 +129,27 @@ add_action( 'init', 'recipe_tax_init' );
 
 add_filter( 'the_content', 'add_recipe_info', 1 );
 
+/**
+ * Mark modern recipe pages so the active theme's duplicate title and
+ * featured-image presentation can be hidden without affecting other layouts.
+ */
+function recipebook_modern_recipe_body_class( $classes ) {
+    if ( ! is_singular( 'recipes' ) ) {
+        return $classes;
+    }
+
+    $options = get_option( 'recipebook_settings', array() );
+    $theme = isset( $options['layout_theme'] ) ? sanitize_key( $options['layout_theme'] ) : 'basic';
+
+    if ( 'modern' === $theme ) {
+        $classes[] = 'rb-modern-recipe';
+    }
+
+    return $classes;
+}
+add_filter( 'body_class', 'recipebook_modern_recipe_body_class' );
+
+
 function recipebook_load_archive_template( $template ) {
     if ( is_post_type_archive( 'recipes' ) ) {
         $plugin_template = plugin_dir_path( __FILE__ ) . 'archive-recipes.php';
@@ -174,7 +195,7 @@ function my_javascripts() {
         return;
     }
     $script_file = recipebook_url . 'script/recipe-book-front.js';
-    wp_enqueue_script( 'recipe-book-front', $script_file, array(), '0.1.1', true );
+    wp_enqueue_script( 'recipe-book-front', $script_file, array(), '0.1.3', true );
 }
 add_action( 'wp_enqueue_scripts', 'my_javascripts' );
 

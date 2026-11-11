@@ -8,7 +8,7 @@
         //get the older values, wont work the first time
         
         $options = get_option( 'recipebook_settings', array() );
-        $theme = isset( $options['layout_theme'] ) ? $options['layout_theme'] : 'basic';
+        $theme = isset( $options['layout_theme'] ) && in_array( $options['layout_theme'], array( 'basic', 'modern' ), true ) ? $options['layout_theme'] : 'basic';
         ?>
 
         
@@ -21,19 +21,15 @@
                             <li>
                                 <label>
                                     <input name="recipebook_settings[layout_theme]" type="radio" value="basic" id="" <?php echo ($theme == 'basic') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/theme-basic.png"/>
+                                    <img src="<?php echo esc_url( recipebook_url . 'admin/images/theme-basic.svg' ); ?>" alt="<?php esc_attr_e( 'Basic layout preview', 'recipebook' ); ?>" />
+                                    <span><?php esc_html_e( 'Basic', 'recipebook' ); ?></span>
                                 </label>
                             </li>
                             <li>
                                 <label>
-                                    <input name="recipebook_settings[layout_theme]" type="radio" value="olive" id="" <?php echo ($theme == 'olive') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/theme-olive.png"/>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input name="recipebook_settings[layout_theme]" type="radio" value="magazine" id="" <?php echo ($theme == 'magazine') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/theme-mag.png"/>
+                                    <input name="recipebook_settings[layout_theme]" type="radio" value="modern" <?php checked( $theme, 'modern' ); ?> />
+                                    <img src="<?php echo esc_url( recipebook_url . 'admin/images/theme-modern.svg' ); ?>" alt="<?php esc_attr_e( 'Modern layout preview', 'recipebook' ); ?>" />
+                                    <span><?php esc_html_e( 'Modern', 'recipebook' ); ?></span>
                                 </label>
                             </li>
                         </ul>
