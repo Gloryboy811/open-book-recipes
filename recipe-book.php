@@ -3,7 +3,7 @@
  * Plugin Name: Open Book Recipes
  * Plugin URI: https://github.com/Gloryboy811/open-book-recipes
  * Description: Open Book Recipes
- * Version: 0.1.6
+ * Version: 0.1.7
  * Author: Matthew Hughes
  * Author URI: http://www.MatthewHughes.co.za
  */
@@ -190,12 +190,67 @@ function add_recipe_info($content) {
 }
 
 
+/**
+ * Apply public archive search and filters to the main recipes archive query.
+ * Search uses a dedicated query-string key so WordPress keeps the CPT archive
+ * template instead of switching to the global search-results template.
+ */
+function recipebook_filter_recipes_archive( $query ) {
+    if ( is_admin() || ! $query->is_main_query() || ! $query->is_post_type_archive( 'recipes' ) ) {
+        return;
+    }
+
+    $query->set( 'post_type', 'recipes' );
+    $query->set( 'posts_per_page', 12 );
+
+    if ( isset( $_GET['recipe_search'] ) ) {
+        $search = sanitize_text_field( wp_unslash( $_GET['recipe_search'] ) );
+        if ( $search !== '' ) {
+            $query->set( 's', $search );
+        }
+    }
+
+    $tax_query = array();
+    foreach ( array( 'meal_type' => 'mealtime', 'cuisine' => 'cuisine' ) as $request_key => $taxonomy ) {
+        if ( empty( $_GET[$request_key] ) ) {
+            continue;
+        }
+        $slug = sanitize_title( wp_unslash( $_GET[$request_key] ) );
+        if ( $slug !== '' ) {
+            $tax_query[] = array(
+                'taxonomy' => $taxonomy,
+                'field'    => 'slug',
+                'terms'    => $slug,
+            );
+        }
+    }
+    if ( count( $tax_query ) > 1 ) {
+        $tax_query['relation'] = 'AND';
+    }
+    if ( $tax_query ) {
+        $query->set( 'tax_query', $tax_query );
+    }
+
+    if ( ! empty( $_GET['difficulty'] ) ) {
+        $difficulty = sanitize_text_field( wp_unslash( $_GET['difficulty'] ) );
+        $query->set( 'meta_query', array(
+            array(
+                'key'     => '_rb_recipe_details',
+                'value'   => '"difficulty":"' . $difficulty . '"',
+                'compare' => 'LIKE',
+            ),
+        ) );
+    }
+}
+add_action( 'pre_get_posts', 'recipebook_filter_recipes_archive' );
+
+
 function my_javascripts() {
     if ( ! is_singular( 'recipes' ) ) {
         return;
     }
     $script_file = recipebook_url . 'script/recipe-book-front.js';
-    wp_enqueue_script( 'recipe-book-front', $script_file, array(), '0.1.6', true );
+    wp_enqueue_script( 'recipe-book-front', $script_file, array(), '0.1.7', true );
 }
 add_action( 'wp_enqueue_scripts', 'my_javascripts' );
 
