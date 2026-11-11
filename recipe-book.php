@@ -3,7 +3,7 @@
  * Plugin Name: Open Book Recipes
  * Plugin URI: https://github.com/Gloryboy811/open-book-recipes
  * Description: Open Book Recipes
- * Version: 0.1.7
+ * Version: 0.1.8
  * Author: Matthew Hughes
  * Author URI: http://www.MatthewHughes.co.za
  */
@@ -231,18 +231,43 @@ function recipebook_filter_recipes_archive( $query ) {
         $query->set( 'tax_query', $tax_query );
     }
 
-    if ( ! empty( $_GET['difficulty'] ) ) {
-        $difficulty = sanitize_text_field( wp_unslash( $_GET['difficulty'] ) );
-        $query->set( 'meta_query', array(
-            array(
-                'key'     => '_rb_recipe_details',
-                'value'   => '"difficulty":"' . $difficulty . '"',
-                'compare' => 'LIKE',
-            ),
-        ) );
+    if ( isset( $_GET['difficulty'] ) && $_GET['difficulty'] !== '' ) {
+        $query->set( 'rb_archive_difficulty', sanitize_text_field( wp_unslash( $_GET['difficulty'] ) ) );
     }
 }
 add_action( 'pre_get_posts', 'recipebook_filter_recipes_archive' );
+
+/**
+ * Match difficulty using dedicated metadata, with JSON fallback for older recipes.
+ */
+function recipebook_archive_difficulty_where( $where, $query ) {
+    global $wpdb;
+    if ( is_admin() || ! $query->is_main_query() || ! $query->is_post_type_archive( 'recipes' ) ) {
+        return $where;
+    }
+    $difficulty = $query->get( 'rb_archive_difficulty' );
+    if ( ! is_string( $difficulty ) || $difficulty === '' ) {
+        return $where;
+    }
+    $where .= $wpdb->prepare(
+        " AND EXISTS (
+            SELECT 1 FROM {$wpdb->postmeta} AS rb_difficulty_meta
+            WHERE rb_difficulty_meta.post_id = {$wpdb->posts}.ID
+              AND (
+                ( rb_difficulty_meta.meta_key = '_rb_recipe_difficulty' AND rb_difficulty_meta.meta_value = %s )
+                OR
+                ( rb_difficulty_meta.meta_key = '_rb_recipe_details'
+                  AND JSON_UNQUOTE(JSON_EXTRACT(rb_difficulty_meta.meta_value, '$.difficulty')) = %s )
+              )
+        )",
+        $difficulty,
+        $difficulty
+    );
+    return $where;
+}
+add_filter( 'posts_where', 'recipebook_archive_difficulty_where', 10, 2 );
+
+
 
 /**
  * Extend archive text search to recipe ingredients, method steps and notes.
@@ -269,7 +294,7 @@ function my_javascripts() {
         return;
     }
     $script_file = recipebook_url . 'script/recipe-book-front.js';
-    wp_enqueue_script( 'recipe-book-front', $script_file, array(), '0.1.7', true );
+    wp_enqueue_script( 'recipe-book-front', $script_file, array(), '0.1.8', true );
 }
 add_action( 'wp_enqueue_scripts', 'my_javascripts' );
 
