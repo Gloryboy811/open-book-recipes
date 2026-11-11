@@ -244,6 +244,25 @@ function recipebook_filter_recipes_archive( $query ) {
 }
 add_action( 'pre_get_posts', 'recipebook_filter_recipes_archive' );
 
+/**
+ * Extend archive text search to recipe ingredients, method steps and notes.
+ */
+function recipebook_archive_search_meta( $search, $query ) {
+    global $wpdb;
+    if ( is_admin() || ! $query->is_main_query() || ! $query->is_post_type_archive( 'recipes' ) ) { return $search; }
+    $term = $query->get( 's' );
+    if ( ! is_string( $term ) || $term === '' ) { return $search; }
+    $like = '%' . $wpdb->esc_like( $term ) . '%';
+    $sql = ' AND ( ' . $wpdb->posts . '.post_title LIKE %s OR ' . $wpdb->posts . '.post_excerpt LIKE %s OR ' . $wpdb->posts . '.post_content LIKE %s OR EXISTS ( SELECT 1 FROM ' . $wpdb->postmeta . ' AS rb_search_meta WHERE rb_search_meta.post_id = ' . $wpdb->posts . '.ID AND rb_search_meta.meta_key IN ( "_rb_recipe_components", "_rb_recipe_steps", "_rb_recipe_notes" ) AND rb_search_meta.meta_value LIKE %s ) )';
+    return $wpdb->prepare( $sql, $like, $like, $like, $like );
+}
+add_filter( 'posts_search', 'recipebook_archive_search_meta', 10, 2 );
+
+function recipebook_clear_archive_difficulty_cache( $post_id ) {
+    if ( 'recipes' === get_post_type( $post_id ) ) { delete_transient( 'recipebook_archive_difficulties' ); }
+}
+add_action( 'save_post', 'recipebook_clear_archive_difficulty_cache' );
+
 
 function my_javascripts() {
     if ( ! is_singular( 'recipes' ) ) {
