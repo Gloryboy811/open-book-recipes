@@ -12,7 +12,10 @@
     $in_counter = 0;
     $components = array();
     foreach($componentsJson as $index => $compJson) {
-        $components[] = json_decode( $compJson );
+        $decoded_component = json_decode( $compJson );
+        if ( is_object( $decoded_component ) && isset( $decoded_component->ingredients ) && is_array( $decoded_component->ingredients ) ) {
+            $components[] = $decoded_component;
+        }
     }
 ?>   
 <p><i>Click below to add each component and the ingredients that make it...</i></p>
@@ -26,8 +29,8 @@
                     continue;
                 } 
                 echo '<li id="rb-comp-card-title-'.$index.'" onclick="showTab('.$index.')">
-                <input onchange="changeTitle('.$index.')" type="text" id="rb_components_'.$index.'" name="rb_components['.$index.']" value="'.$component->title.'">
-                <label id="rb_title_'.$index.'" for="rb_components_'.$index.'">'.$component->title.'</label>
+                <input onchange="changeTitle('.$index.')" type="text" id="rb_components_'.$index.'" name="rb_components['.$index.']" value="'.esc_attr( $component->title ).'">
+                <label id="rb_title_'.$index.'" for="rb_components_'.$index.'">'.esc_html( $component->title ).'</label>
                 <span onclick="rbDeleteC('.$index.');" class="rb-delete-btn" title="Remove Component">-</span>
                 </li>';
                 $compCount++;
@@ -66,10 +69,10 @@
                             { 
                             ?>
                             <tr id="rb-ingredient-<?php echo $compCount; ?>-<?php echo $in_counter; ?>">
-                                <td><input value="<?php echo $objInfo->amount ?>" type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_amount[<?php echo $in_counter; ?>]"/></td>
-                                <td><input value="<?php echo $objInfo->denom ?>" type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_denominator[<?php echo $in_counter; ?>]"/></td>
-                                <td><input value="<?php echo $objInfo->title ?>" type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_name[<?php echo $in_counter; ?>]"/></td>
-                                <td><input class="rb_i_note" value="<?php echo $objInfo->extra ?>" type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_extra[<?php echo $in_counter; ?>]"/></td>
+                                <td><input value="<?php echo esc_attr( $objInfo->amount ); ?>" type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_amount[<?php echo $in_counter; ?>]"/></td>
+                                <td><input value="<?php echo esc_attr( $objInfo->denom ); ?>" type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_denominator[<?php echo $in_counter; ?>]"/></td>
+                                <td><input value="<?php echo esc_attr( $objInfo->title ); ?>" type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_name[<?php echo $in_counter; ?>]"/></td>
+                                <td><input class="rb_i_note" value="<?php echo esc_attr( $objInfo->extra ); ?>" type="text" name="rb_component<?php echo $compCount; ?>.rb_ingredient_extra[<?php echo $in_counter; ?>]"/></td>
                                 <td><span onclick="rbDeleteI(<?php echo $compCount; ?>,<?php echo $in_counter; ?>);" class="rb-delete-btn" title="Remove Ingredient">x</span></td>
                             </tr>
                             <?php 
@@ -126,14 +129,14 @@
 <h2 class="rb-subtitle" id="rb-instruction-header">Recipe Instructions</h2>
 <ol id="rb-step-list"><?php 
     foreach($steps as $index => $step) {
-        echo '<li id="rb-step-'.$index.'"><textarea rows="2" class="rb-textarea" name="rb_steps['.$index.']">'.$step.'</textarea><span onclick="rbDeleteS('.$index.');" class="rb-delete-btn" title="Remove Step" >-</span></li>';
+        echo '<li id="rb-step-' . absint( $index ) . '"><textarea rows="2" class="rb-textarea" name="rb_steps[' . absint( $index ) . ']">' . esc_textarea( $step ) . '</textarea><span onclick="rbDeleteS(' . absint( $index ) . ');" class="rb-delete-btn" title="Remove Step" >-</span></li>';
     }
     ?><li id="rb-step-<?php echo count($steps); ?>"><textarea rows="2" class="rb-textarea" name="rb_steps[<?php echo count($steps); ?>]"></textarea><span onclick="rbDeleteS(<?php echo count($steps); ?>);" class="rb-delete-btn" title="Remove Step" >-</span></li>
 </ol>
 <a id="rb-step-add" class="taxonomy-add-new" href="javascript:void(0)"><span class="rb-add-btn">+</span> Add New Step</a>
 <br/>
 <h2 class="rb-subtitle" id="rb-notes-header">Recipe Notes</h2>
-<textarea rows="5" class="rb-textarea rb_i_note" name="rb_notes"><?php echo $notes; ?></textarea>
+<textarea rows="5" class="rb-textarea rb_i_note" name="rb_notes"><?php echo esc_textarea( $notes ); ?></textarea>
 <br/>
 <script>
     var components = <?php echo (max(0,(count($components)-1))) ?>;
