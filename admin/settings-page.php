@@ -7,8 +7,8 @@
         
         //get the older values, wont work the first time
         
-        $options = get_option( 'recipebook_settings' ); 
-        $theme = $options['layout_theme'] ? $options['layout_theme'] : 'basic';
+        $options = get_option( 'recipebook_settings', array() );
+        $theme = isset( $options['layout_theme'] ) ? $options['layout_theme'] : 'basic';
         ?>
 
         
@@ -86,7 +86,7 @@
                             </li>
                             <li>
                                 <label>
-                                    <input name="recipebook_settings[image_size]" type="radio" value="excewiderpt" id="" <?php echo (isset($options['image_size']) && $options['image_size'] == 'wide') ? 'checked' : ''; ?> />
+                                    <input name="recipebook_settings[image_size]" type="radio" value="wide" id="" <?php echo (isset($options['image_size']) && $options['image_size'] == 'wide') ? 'checked' : ''; ?> />
                                     <img src="<?php echo recipebook_url; ?>/admin/images/image-wide.png"/>
                                 </label>
                             </li>
@@ -145,7 +145,6 @@
         <input type="submit" class="button button-primary" value="Update Settings" />
     </form>
         
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js"></script>
     <script>
     jQuery(document).ready(function($){
