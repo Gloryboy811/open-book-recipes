@@ -29,9 +29,9 @@
                     continue;
                 } 
                 echo '<li id="rb-comp-card-title-'.$index.'" onclick="showTab('.$index.')">
-                <input onchange="changeTitle('.$index.')" type="text" id="rb_components_'.$index.'" name="rb_components['.$index.']" value="'.esc_attr( $component->title ).'">
+                <input onchange="changeTitle(' . absint( $index ) . ')" type="text" id="rb_components_' . absint( $index ) . '" name="rb_components['.$index.']" value="'.esc_attr( $component->title ).'">
                 <label id="rb_title_'.$index.'" for="rb_components_'.$index.'">'.esc_html( $component->title ).'</label>
-                <span onclick="rbDeleteC('.$index.');" class="rb-delete-btn" title="Remove Component">-</span>
+                <span onclick="rbDeleteC(' . absint( $index ) . ');" class="rb-delete-btn" title="Remove Component">-</span>
                 </li>';
                 $compCount++;
             }
@@ -144,7 +144,7 @@
     ingredients[0] = 0;
     <?php 
         foreach($components as $key => $component) {
-            echo 'ingredients['.$key.'] = '.(count( $component->ingredients ) - 1).'; ';
+            echo 'ingredients[' . absint( $key ) . '] = ' . max( 0, count( $component->ingredients ) - 1 ) . '; ';
         }            
     ?>
 
