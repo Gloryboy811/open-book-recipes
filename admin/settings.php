@@ -15,7 +15,7 @@ function recipebook_settings_validate($args){
     }
 
     $allowed = array(
-        'layout_theme' => array( 'basic' ),
+        'layout_theme' => array( 'basic', 'modern' ),
         'title_card' => array( 'icons', 'heading', 'excerpt' ),
         'image_size' => array( 'corner', 'half', 'wide' ),
         'rating_place' => array( 'over', 'side' ),
