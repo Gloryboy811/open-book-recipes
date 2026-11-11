@@ -129,13 +129,24 @@ add_action( 'init', 'recipe_tax_init' );
 
 add_filter( 'the_content', 'add_recipe_info', 1 );
 
+function recipebook_load_archive_template( $template ) {
+    if ( is_post_type_archive( 'recipes' ) ) {
+        $plugin_template = plugin_dir_path( __FILE__ ) . 'archive-recipes.php';
+        if ( file_exists( $plugin_template ) ) {
+            return $plugin_template;
+        }
+    }
+    return $template;
+}
+add_filter( 'template_include', 'recipebook_load_archive_template' );
+
 function add_recipe_info($content) {
 	global $post;
 
 	if ( is_singular() && in_the_loop() && is_main_query() && $post->post_type == 'recipes' ) {
 
 		$options = get_option( 'recipebook_settings' );
-		$theme = $options['layout_theme'] ? $options['layout_theme'] : 'basic';
+		$theme = isset( $options['layout_theme'] ) ? sanitize_key( $options['layout_theme'] ) : 'basic';
 
 		// check layout theme
 		$content_file =  dirname( __FILE__ )  . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'single-'.$theme.'.php';
@@ -148,7 +159,7 @@ function add_recipe_info($content) {
 
 		ob_start();
 		include_once($content_file);
-		echo '<style>'.$options['custom_css'].'</style>';
+		echo '<style>' . ( isset( $options['custom_css'] ) ? wp_strip_all_tags( $options['custom_css'] ) : '' ) . '</style>';
 		$content = ob_get_clean();
 		$content = str_replace("    ", '', $content);
 		$content = str_replace(array("<p></p>", "\r", "\n"), '', $content);
@@ -159,8 +170,11 @@ function add_recipe_info($content) {
 
 
 function my_javascripts() {
-	$script_file =  recipebook_url . 'script' . DIRECTORY_SEPARATOR . 'recipe-book-front.js';
-    wp_enqueue_script( 'recipe-book-front', $script_file);
+    if ( ! is_singular( 'recipes' ) ) {
+        return;
+    }
+    $script_file = recipebook_url . 'script/recipe-book-front.js';
+    wp_enqueue_script( 'recipe-book-front', $script_file, array(), '0.1.1', true );
 }
 add_action( 'wp_enqueue_scripts', 'my_javascripts' );
 
