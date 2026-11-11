@@ -8,17 +8,11 @@
 global $post;
 
 $recipe_id = get_the_ID();
-$options = get_option( 'recipebook_settings', array() );
-$accent = isset( $options['accent_color'] ) ? sanitize_hex_color( $options['accent_color'] ) : '#b65b3c';
-$accent_base = isset( $options['accent_color_base'] ) ? sanitize_hex_color( $options['accent_color_base'] ) : '#25352f';
-$accent = $accent ? $accent : '#b65b3c';
-$accent_base = $accent_base ? $accent_base : '#25352f';
-
 $css_path = plugin_dir_path( dirname( __FILE__ ) ) . 'styles/style-modern.css';
 $css_version = file_exists( $css_path ) ? filemtime( $css_path ) : '1.0';
 ?>
 <link rel="stylesheet" href="<?php echo esc_url( recipebook_url . 'styles/style-modern.css?ver=' . $css_version ); ?>" />
-<article class="rb-modern" style="--rbm-accent: <?php echo esc_attr( $accent ); ?>; --rbm-ink: <?php echo esc_attr( $accent_base ); ?>;">
+<article class="rb-modern">
     <?php
     $hero_image = get_the_post_thumbnail_url( $recipe_id, 'full' );
     $details = json_decode( (string) get_post_meta( $recipe_id, '_rb_recipe_details', true ) );
