@@ -10,7 +10,7 @@
         $details = json_decode( $detailsJson.'' );
         
         ?>
-        <a href="<?php echo $url; ?>">
+        <a href="<?php echo esc_url( $url ); ?>">
         <div class="rb-list-block">
             <div class="rb-title-top">
                 <div class="rb-list-title">
@@ -18,7 +18,7 @@
                     <div class="rb-excerpt-text">
                         <?php 
                             $ex = get_the_excerpt(); 
-                            echo trim(substr($ex, 0, 60)).(strlen($ex) > 60 ? '...' : '');
+                            echo esc_html( trim( substr( $ex, 0, 60 ) ) . ( strlen( $ex ) > 60 ? '...' : '' ) );
                         ?>
                     </div>
                 </div>
@@ -27,11 +27,11 @@
                         if ( has_post_thumbnail() ) {
                             $mainImg = get_the_post_thumbnail_url();
                             ?>
-                            <div style="background-image: url('<?php echo $mainImg; ?>')"></div>
+                            <div style="background-image: url('<?php echo esc_url( $mainImg ); ?>')"></div>
                             <?php
                         } else {
                             ?>
-                            <div style="background-image: url('<?php echo recipebook_url; ?>'/images/recipe_noimage.jpg)"></div>
+                            <div style="background-image: url('<?php echo esc_url( recipebook_url ); ?>'/images/recipe_noimage.jpg)"></div>
                             <?php
                         }
                     ?>
@@ -43,19 +43,19 @@
                     <?php if($details->cals) { ?>
                         <li>
                             <span>Calories:</span>
-                            <?php echo $details->cals; ?>
+                            <?php echo esc_html( $details->cals ); ?>
                         </li>
                     <?php } ?>
                     <?php if($details->serves) { ?>
                         <li>
                             <span>Serves:</span>
-                            <?php echo $details->serves; ?>
+                            <?php echo esc_html( $details->serves ); ?>
                         </li>
                     <?php } ?>
                     <?php if($details->difficulty) { ?>
                         <li>
                             <span>Difficulty:</span>
-                            <?php echo $details->difficulty; ?>
+                            <?php echo esc_html( $details->difficulty ); ?>
                         </li>     
                     <?php } ?>
                 <?php } ?>
