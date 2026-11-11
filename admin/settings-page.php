@@ -36,6 +36,13 @@
                                     <img src="<?php echo recipebook_url; ?>/admin/images/theme-mag.png"/>
                                 </label>
                             </li>
+                            <li>
+                                <label>
+                                    <input name="recipebook_settings[layout_theme]" type="radio" value="modern" <?php checked( $theme, 'modern' ); ?> />
+                                    <img src="<?php echo esc_url( recipebook_url . 'admin/images/theme-modern.svg' ); ?>" alt="<?php esc_attr_e( 'Modern layout preview', 'recipebook' ); ?>" />
+                                    <span><?php esc_html_e( 'Modern', 'recipebook' ); ?></span>
+                                </label>
+                            </li>
                         </ul>
                     </fieldset>
                 </td>
