@@ -15,7 +15,7 @@
     <?php $post_body = get_the_content(); 
     
     if ($post_body) {
-        echo wp_kses_post( apply_filters( 'the_content', $post_body ) );
+        echo wp_kses_post( $post_body );
         ?><hr/><?php
     }
     ?>
