@@ -20,20 +20,9 @@
                         <ul class="rb-image-select">
                             <li>
                                 <label>
-                                    <input name="recipebook_settings[layout_theme]" type="radio" value="basic" id="" <?php echo ($theme == 'basic') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/theme-basic.png"/>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input name="recipebook_settings[layout_theme]" type="radio" value="olive" id="" <?php echo ($theme == 'olive') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/theme-olive.png"/>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input name="recipebook_settings[layout_theme]" type="radio" value="magazine" id="" <?php echo ($theme == 'magazine') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/theme-mag.png"/>
+                                    <input name="recipebook_settings[layout_theme]" type="radio" value="basic" <?php checked( $theme, 'basic' ); ?> />
+                                    <img src="<?php echo esc_url( recipebook_url . 'admin/images/theme-basic.svg' ); ?>" alt="<?php esc_attr_e( 'Layout 1 preview', 'recipebook' ); ?>" />
+                                    <span><?php esc_html_e( 'Layout 1', 'recipebook' ); ?></span>
                                 </label>
                             </li>
                         </ul>
