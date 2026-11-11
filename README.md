@@ -63,7 +63,7 @@ The Recipe Gallery section on the right of the screen will hold additional image
 # Settings (Alpha)
  In the Recipe Book menu item on the side, you will see a settings item.
  
- Here you can currently choose between 1 of 3 layout options.
+ Layout 1 is the supported recipe layout. Layouts 2 and 3 have been retired because they are broken.
  
  The rest of the settings do not work currently.
  
