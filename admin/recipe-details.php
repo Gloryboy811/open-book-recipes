@@ -110,7 +110,7 @@
         <tr id="rb_nut_remove"><?php
             if(is_array($detailsNutTitles)) {
                 foreach($detailsNutTitles as $key => $value) {
-                    echo '<td><button onclick="remove_nut(event, '.$key.')">Remove</button></td>';
+                    echo '<td><button onclick="remove_nut(event, ' . absint( $key ) . ')">Remove</button></td>';
                 }
             }
         ?></tr>
