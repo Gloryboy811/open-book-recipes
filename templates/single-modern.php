@@ -43,7 +43,9 @@ $css_version = file_exists( $css_path ) ? filemtime( $css_path ) : '1.0';
     };
 
     $meal_types = get_the_terms( $recipe_id, 'mealtime' );
+    $meal_types = is_array( $meal_types ) ? $meal_types : array();
     $cuisines = get_the_terms( $recipe_id, 'cuisine' );
+    $cuisines = is_array( $cuisines ) ? $cuisines : array();
     ?>
 
     <header class="rbm-hero<?php echo $hero_image ? ' has-image' : ' no-image'; ?>">
@@ -103,7 +105,7 @@ $css_version = file_exists( $css_path ) ? filemtime( $css_path ) : '1.0';
                 $component = json_decode( $component_json );
                 if ( ! is_object( $component ) || empty( $component->ingredients ) || ! is_array( $component->ingredients ) ) { continue; }
             ?>
-                <div class="rbm-ingredient-group">
+                <div class="rbm-ingredient-group<?php echo count( $components_json ) === 1 ? ' is-single' : ''; ?>">
                     <?php if ( count( $components_json ) > 1 && ! empty( $component->title ) ) : ?><h3><?php echo esc_html( $component->title ); ?></h3><?php endif; ?>
                     <ul class="rbm-ingredient-list">
                         <?php foreach ( $component->ingredients as $ingredient ) :
