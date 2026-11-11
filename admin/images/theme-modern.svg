@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 260" role="img" aria-labelledby="title desc">
+<title id="title">Modern recipe layout preview</title>
+<desc id="desc">A clean recipe page with a large food image, dark title overlay, metadata chips and ingredient rows.</desc>
+<rect width="420" height="260" rx="14" fill="#f4f4ef"/>
+<rect x="14" y="14" width="392" height="130" rx="9" fill="#34483e"/>
+<rect x="14" y="14" width="392" height="130" rx="9" fill="#8e9c83"/>
+<path d="M14 105 Q100 60 190 105 T406 88 V144 H14Z" fill="#26372f" opacity=".78"/>
+<text x="30" y="48" fill="#f0c2a8" font-family="Arial,sans-serif" font-size="9" font-weight="700" letter-spacing="2">THE RECIPE</text>
+<text x="30" y="78" fill="#fff" font-family="Arial,sans-serif" font-size="25" font-weight="700">Sunday roast</text>
+<text x="30" y="98" fill="#fff" font-family="Arial,sans-serif" font-size="10">Simple, seasonal and made to share</text>
+<rect x="18" y="156" width="92" height="25" rx="12" fill="#fff" stroke="#e5e5df"/>
+<rect x="118" y="156" width="92" height="25" rx="12" fill="#fff" stroke="#e5e5df"/>
+<rect x="218" y="156" width="92" height="25" rx="12" fill="#fff" stroke="#e5e5df"/>
+<rect x="18" y="195" width="120" height="6" rx="3" fill="#34483e"/>
+<rect x="18" y="210" width="175" height="5" rx="2.5" fill="#c6c9c0"/>
+<rect x="18" y="224" width="160" height="5" rx="2.5" fill="#c6c9c0"/>
+<rect x="224" y="195" width="176" height="6" rx="3" fill="#34483e"/>
+<rect x="224" y="210" width="174" height="5" rx="2.5" fill="#c6c9c0"/>
+<rect x="224" y="224" width="145" height="5" rx="2.5" fill="#c6c9c0"/>
+</svg>
