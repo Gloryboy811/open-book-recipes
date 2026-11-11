@@ -18,26 +18,28 @@ $meal_terms = is_array( $meal_terms ) ? $meal_terms : array();
 $cuisine_terms = is_array( $cuisine_terms ) ? $cuisine_terms : array();
 
 // Difficulty is stored inside the existing _rb_recipe_details JSON meta.
-$difficulties = array();
-$recipe_ids = get_posts( array(
-    'post_type'              => 'recipes',
-    'post_status'            => 'publish',
-    'numberposts'            => -1,
-    'fields'                 => 'ids',
-    'no_found_rows'          => true,
-    'update_post_meta_cache' => true,
-    'update_post_term_cache' => false,
-) );
-foreach ( $recipe_ids as $recipe_id ) {
-    $details = json_decode( (string) get_post_meta( $recipe_id, '_rb_recipe_details', true ), true );
-    if ( is_array( $details ) && ! empty( $details['difficulty'] ) ) {
-        $difficulty = trim( sanitize_text_field( $details['difficulty'] ) );
-        if ( $difficulty !== '' ) {
-            $difficulties[ strtolower( $difficulty ) ] = $difficulty;
+$difficulties = get_transient( 'recipebook_archive_difficulties' );
+if ( false === $difficulties ) {
+    $difficulties = array();
+    $recipe_ids = get_posts( array(
+        'post_type'              => 'recipes',
+        'post_status'            => 'publish',
+        'numberposts'            => -1,
+        'fields'                 => 'ids',
+        'no_found_rows'          => true,
+        'update_post_meta_cache' => true,
+        'update_post_term_cache' => false,
+    ) );
+    foreach ( $recipe_ids as $recipe_id ) {
+        $details = json_decode( (string) get_post_meta( $recipe_id, '_rb_recipe_details', true ), true );
+        if ( is_array( $details ) && ! empty( $details['difficulty'] ) ) {
+            $difficulty = trim( sanitize_text_field( $details['difficulty'] ) );
+            if ( $difficulty !== '' ) { $difficulties[ strtolower( $difficulty ) ] = $difficulty; }
         }
     }
+    natcasesort( $difficulties );
+    set_transient( 'recipebook_archive_difficulties', $difficulties, 12 * HOUR_IN_SECONDS );
 }
-natcasesort( $difficulties );
 ?>
 <link href="<?php echo esc_url( recipebook_url . 'styles/style-archive.css?ver=' . ( file_exists( plugin_dir_path( __FILE__ ) . 'styles/style-archive.css' ) ? filemtime( plugin_dir_path( __FILE__ ) . 'styles/style-archive.css' ) : '1' ) ); ?>" rel="stylesheet" type="text/css" />
 <header class="archive-header has-text-align-center header-footer-group">
