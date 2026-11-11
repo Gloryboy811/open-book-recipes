@@ -10,7 +10,11 @@
         --rb-accent-color-base: <?php echo isset($options['accent_color_base']) ? esc_attr($options['accent_color_base']) : '#92621a'; ?>;
         }
     </style>
-    <link href="<?php echo recipebook_url; ?>/styles/style-basic.css?<?php echo (rand()); ?>" rel="stylesheet" type="text/css" />
+    <?php
+        $basic_css_path = plugin_dir_path( dirname( __FILE__ ) ) . 'styles/style-basic.css';
+        $basic_css_version = file_exists( $basic_css_path ) ? filemtime( $basic_css_path ) : '1.0';
+    ?>
+    <link href="<?php echo esc_url( recipebook_url . 'styles/style-basic.css?ver=' . $basic_css_version ); ?>" rel="stylesheet" type="text/css" />
     
     <?php $post_body = get_the_content(); 
     
