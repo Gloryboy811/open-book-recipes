@@ -3,7 +3,7 @@
  * Plugin Name: Open Book Recipes
  * Plugin URI: https://github.com/Gloryboy811/open-book-recipes
  * Description: Open Book Recipes
- * Version: 0.1.1
+ * Version: 0.1.5
  * Author: Matthew Hughes
  * Author URI: http://www.MatthewHughes.co.za
  */
