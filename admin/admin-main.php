@@ -194,6 +194,7 @@ class RecipeBook_Admin {
             'difficulty' => isset( $_POST['rb_d_difficulty'] ) ? sanitize_text_field( wp_unslash( $_POST['rb_d_difficulty'] ) ) : '',
         );
         update_post_meta( $post_id, '_rb_recipe_details', wp_json_encode( $details ) );
+        update_post_meta( $post_id, '_rb_recipe_difficulty', sanitize_text_field( $details['difficulty'] ) );
 
         update_post_meta( $post_id, '_rb_nut_titles', isset( $_POST['rb_n_t'] ) && is_array( $_POST['rb_n_t'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['rb_n_t'] ) ) : array() );
         update_post_meta( $post_id, '_rb_nut_amounts', isset( $_POST['rb_n_a'] ) && is_array( $_POST['rb_n_a'] ) ? array_map( 'sanitize_text_field', wp_unslash( $_POST['rb_n_a'] ) ) : array() );

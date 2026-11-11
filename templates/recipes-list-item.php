@@ -1,68 +1,35 @@
-
 <?php
 /**
-* The template used to display archive content
-*/
+ * Recipe archive card.
+ *
+ * @package OpenBookRecipes
+ */
+$recipe_id = get_the_ID();
+$details = json_decode( (string) get_post_meta( $recipe_id, '_rb_recipe_details', true ) );
+$options = get_option( 'recipebook_settings', array() );
+$card_style = isset( $options['archive_card_style'] ) ? sanitize_key( $options['archive_card_style'] ) : 'photo';
+$card_style = in_array( $card_style, array( 'photo', 'classic' ), true ) ? $card_style : 'photo';
+$thumbnail = get_the_post_thumbnail_url( $recipe_id, 'large' );
+if ( ! $thumbnail ) { $thumbnail = recipebook_url . 'images/recipe-placeholder.svg'; }
 ?>
-<?php 
-        $url = get_permalink();
-        $detailsJson = get_post_meta( $post->ID, '_rb_recipe_details', true );
-        $details = json_decode( $detailsJson.'' );
-        
-        ?>
-        <a href="<?php echo esc_url( $url ); ?>">
-        <div class="rb-list-block">
-            <div class="rb-title-top">
-                <div class="rb-list-title">
-                    <h2 class="rb-recipe-title"><?php the_title(); ?></h2>
-                    <div class="rb-excerpt-text">
-                        <?php 
-                            $ex = get_the_excerpt(); 
-                            echo esc_html( trim( substr( $ex, 0, 60 ) ) . ( strlen( $ex ) > 60 ? '...' : '' ) );
-                        ?>
-                    </div>
-                </div>
-                <div class="rb-list-image">
-                    <?php  
-                        if ( has_post_thumbnail() ) {
-                            $mainImg = get_the_post_thumbnail_url();
-                            ?>
-                            <div style="background-image: url('<?php echo esc_url( $mainImg ); ?>')"></div>
-                            <?php
-                        } else {
-                            ?>
-                            <div style="background-image: url('<?php echo esc_url( recipebook_url ); ?>'/images/recipe_noimage.jpg)"></div>
-                            <?php
-                        }
-                    ?>
-                </div>
-            </div>
-            <div class="rb-title-footer">
-                <ul class="rb-details-list">
-                <?php if($details) { ?>
-                    <?php if($details->cals) { ?>
-                        <li>
-                            <span>Calories:</span>
-                            <?php echo esc_html( $details->cals ); ?>
-                        </li>
-                    <?php } ?>
-                    <?php if($details->serves) { ?>
-                        <li>
-                            <span>Serves:</span>
-                            <?php echo esc_html( $details->serves ); ?>
-                        </li>
-                    <?php } ?>
-                    <?php if($details->difficulty) { ?>
-                        <li>
-                            <span>Difficulty:</span>
-                            <?php echo esc_html( $details->difficulty ); ?>
-                        </li>     
-                    <?php } ?>
-                <?php } ?>
-                    <li>&nbsp;</li>
-                </ul>
-            </div>
-        </div></a>
-<?php
-    
-?>
+<article class="rb-recipe-card rb-recipe-card--<?php echo esc_attr( $card_style ); ?>">
+    <a class="rb-recipe-card__link" href="<?php the_permalink(); ?>">
+        <div class="rb-recipe-card__image">
+            <img src="<?php echo esc_url( $thumbnail ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" loading="lazy" />
+            <?php if ( 'photo' === $card_style ) : ?>
+                <span class="rb-recipe-card__image-shade"></span>
+                <h2 class="rb-recipe-card__title"><?php the_title(); ?></h2>
+            <?php endif; ?>
+        </div>
+        <div class="rb-recipe-card__content">
+            <?php if ( 'classic' === $card_style ) : ?><h2 class="rb-recipe-card__title"><?php the_title(); ?></h2><?php endif; ?>
+            <?php $excerpt = get_the_excerpt(); ?>
+            <?php if ( $excerpt ) : ?><p class="rb-recipe-card__excerpt"><?php echo esc_html( wp_trim_words( $excerpt, 18 ) ); ?></p><?php endif; ?>
+            <ul class="rb-recipe-card__meta">
+                <?php if ( is_object( $details ) && ! empty( $details->cals ) ) : ?><li><?php echo esc_html( $details->cals ); ?> kcal</li><?php endif; ?>
+                <?php if ( is_object( $details ) && ! empty( $details->serves ) ) : ?><li><?php echo esc_html( $details->serves ); ?> servings</li><?php endif; ?>
+                <?php if ( is_object( $details ) && ! empty( $details->difficulty ) ) : ?><li><?php echo esc_html( ucfirst( $details->difficulty ) ); ?></li><?php endif; ?>
+            </ul>
+        </div>
+    </a>
+</article>

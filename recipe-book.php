@@ -3,7 +3,7 @@
  * Plugin Name: Open Book Recipes
  * Plugin URI: https://github.com/Gloryboy811/open-book-recipes
  * Description: Open Book Recipes
- * Version: 0.1.6
+ * Version: 0.1.9
  * Author: Matthew Hughes
  * Author URI: http://www.MatthewHughes.co.za
  */
@@ -190,12 +190,111 @@ function add_recipe_info($content) {
 }
 
 
+/**
+ * Apply public archive search and filters to the main recipes archive query.
+ * Search uses a dedicated query-string key so WordPress keeps the CPT archive
+ * template instead of switching to the global search-results template.
+ */
+function recipebook_filter_recipes_archive( $query ) {
+    if ( is_admin() || ! $query->is_main_query() || ! $query->is_post_type_archive( 'recipes' ) ) {
+        return;
+    }
+
+    $query->set( 'post_type', 'recipes' );
+    $query->set( 'posts_per_page', 12 );
+
+    if ( isset( $_GET['recipe_search'] ) ) {
+        $search = sanitize_text_field( wp_unslash( $_GET['recipe_search'] ) );
+        if ( $search !== '' ) {
+            $query->set( 's', $search );
+        }
+    }
+
+    $tax_query = array();
+    foreach ( array( 'meal_type' => 'mealtime', 'cuisine' => 'cuisine' ) as $request_key => $taxonomy ) {
+        if ( empty( $_GET[$request_key] ) ) {
+            continue;
+        }
+        $slug = sanitize_title( wp_unslash( $_GET[$request_key] ) );
+        if ( $slug !== '' ) {
+            $tax_query[] = array(
+                'taxonomy' => $taxonomy,
+                'field'    => 'slug',
+                'terms'    => $slug,
+            );
+        }
+    }
+    if ( count( $tax_query ) > 1 ) {
+        $tax_query['relation'] = 'AND';
+    }
+    if ( $tax_query ) {
+        $query->set( 'tax_query', $tax_query );
+    }
+
+    if ( isset( $_GET['difficulty'] ) && $_GET['difficulty'] !== '' ) {
+        $query->set( 'rb_archive_difficulty', sanitize_text_field( wp_unslash( $_GET['difficulty'] ) ) );
+    }
+}
+add_action( 'pre_get_posts', 'recipebook_filter_recipes_archive' );
+
+/**
+ * Match difficulty using dedicated metadata, with JSON fallback for older recipes.
+ */
+function recipebook_archive_difficulty_where( $where, $query ) {
+    global $wpdb;
+    if ( is_admin() || ! $query->is_main_query() || ! $query->is_post_type_archive( 'recipes' ) ) {
+        return $where;
+    }
+    $difficulty = $query->get( 'rb_archive_difficulty' );
+    if ( ! is_string( $difficulty ) || $difficulty === '' ) {
+        return $where;
+    }
+    $where .= $wpdb->prepare(
+        " AND EXISTS (
+            SELECT 1 FROM {$wpdb->postmeta} AS rb_difficulty_meta
+            WHERE rb_difficulty_meta.post_id = {$wpdb->posts}.ID
+              AND (
+                ( rb_difficulty_meta.meta_key = '_rb_recipe_difficulty' AND rb_difficulty_meta.meta_value = %s )
+                OR
+                ( rb_difficulty_meta.meta_key = '_rb_recipe_details'
+                  AND JSON_UNQUOTE(JSON_EXTRACT(rb_difficulty_meta.meta_value, '$.difficulty')) = %s )
+              )
+        )",
+        $difficulty,
+        $difficulty
+    );
+    return $where;
+}
+add_filter( 'posts_where', 'recipebook_archive_difficulty_where', 10, 2 );
+
+
+
+/**
+ * Extend archive text search to recipe ingredients, method steps and notes.
+ */
+function recipebook_archive_search_meta( $search, $query ) {
+    global $wpdb;
+    if ( is_admin() || ! $query->is_main_query() || ! $query->is_post_type_archive( 'recipes' ) ) { return $search; }
+    $term = $query->get( 's' );
+    if ( ! is_string( $term ) || $term === '' ) { return $search; }
+    $like = '%' . $wpdb->esc_like( $term ) . '%';
+    $sql = ' AND ( ' . $wpdb->posts . '.post_title LIKE %s OR ' . $wpdb->posts . '.post_excerpt LIKE %s OR ' . $wpdb->posts . '.post_content LIKE %s OR EXISTS ( SELECT 1 FROM ' . $wpdb->postmeta . ' AS rb_search_meta WHERE rb_search_meta.post_id = ' . $wpdb->posts . '.ID AND rb_search_meta.meta_key IN ( "_rb_recipe_components", "_rb_recipe_steps", "_rb_recipe_notes" ) AND rb_search_meta.meta_value LIKE %s ) )';
+    return $wpdb->prepare( $sql, $like, $like, $like, $like );
+}
+add_filter( 'posts_search', 'recipebook_archive_search_meta', 10, 2 );
+
+function recipebook_clear_archive_difficulty_cache( $post_id ) {
+    if ( 'recipes' === get_post_type( $post_id ) ) { delete_transient( 'recipebook_archive_difficulties' ); }
+}
+add_action( 'save_post', 'recipebook_clear_archive_difficulty_cache' );
+
+
 function my_javascripts() {
     if ( ! is_singular( 'recipes' ) ) {
         return;
     }
     $script_file = recipebook_url . 'script/recipe-book-front.js';
-    wp_enqueue_script( 'recipe-book-front', $script_file, array(), '0.1.6', true );
+    wp_enqueue_script( 'recipe-book-front', $script_file, array(), '0.1.9', true );
 }
 add_action( 'wp_enqueue_scripts', 'my_javascripts' );
 

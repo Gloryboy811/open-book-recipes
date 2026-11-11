@@ -150,3 +150,124 @@ h2.rb-recipe-title:before {
         padding: 12px;
     }
 }
+
+/* Search and filters for the recipe archive. */
+.rb-archive-container { max-width: 1180px; margin: 0 auto; padding: 24px 20px 56px; }
+.rb-archive-filters {
+    max-width: 980px;
+    margin: 0 auto 18px;
+    padding: 22px;
+    border: 1px solid #e7e7e2;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(0,0,0,.045);
+}
+.rb-archive-search { display: flex; gap: 10px; }
+.rb-archive-search input,
+.rb-archive-filter select {
+    width: 100%;
+    min-width: 0;
+    min-height: 46px;
+    padding: 10px 13px;
+    border: 1px solid #d8dcd8;
+    border-radius: 7px;
+    background: #fff;
+    color: #26332d;
+    font: inherit;
+}
+.rb-archive-search input { flex: 1 1 auto; }
+.rb-archive-search button,
+.rb-archive-filter-actions .rb-filter-submit {
+    min-height: 46px;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 7px;
+    background: #34483e;
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+.rb-archive-search button:hover,
+.rb-archive-filter-actions .rb-filter-submit:hover { background: #26372f; }
+.rb-archive-filter-fields {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+    gap: 14px;
+    align-items: end;
+    margin-top: 16px;
+}
+.rb-archive-filter { min-width: 0; }
+.rb-archive-filter label {
+    display: block;
+    margin: 0 0 6px;
+    color: #354139;
+    font-size: 13px;
+    font-weight: 700;
+}
+.rb-archive-filter-actions { display: flex; align-items: center; gap: 12px; }
+.rb-archive-filter-actions .rb-filter-submit { white-space: nowrap; }
+.rb-archive-filter-actions .rb-filter-reset { color: #58645d; font-size: 14px; white-space: nowrap; }
+.rb-archive-result-count {
+    max-width: 980px;
+    margin: 0 auto 4px;
+    color: #657068;
+    font-size: 14px;
+}
+.rb-archive-empty {
+    max-width: 620px;
+    margin: 30px auto;
+    padding: 38px 20px;
+    border: 1px solid #e7e7e2;
+    border-radius: 12px;
+    text-align: center;
+}
+.rb-archive-empty h2 { margin-top: 0; color: #26332d; }
+.rb-archive-empty a { display: inline-block; margin-top: 8px; color: #34483e; font-weight: 700; }
+.rb-archive-filters button:focus-visible,
+.rb-archive-filters a:focus-visible,
+.rb-archive-filters input:focus-visible,
+.rb-archive-filters select:focus-visible {
+    outline: 3px solid #b8753c;
+    outline-offset: 2px;
+}
+.rb-archive-filters button,
+.rb-archive-filters input,
+.rb-archive-filters select { box-sizing: border-box; }
+@media (max-width: 760px) {
+    .rb-archive-container { padding: 16px 14px 40px; }
+    .rb-archive-filters { padding: 16px; }
+    .rb-archive-filter-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .rb-archive-filter-actions { grid-column: 1 / -1; justify-content: flex-start; }
+}
+@media (max-width: 480px) {
+    .rb-archive-search { flex-direction: column; }
+    .rb-archive-search button { width: 100%; }
+    .rb-archive-filter-fields { grid-template-columns: 1fr; gap: 12px; }
+    .rb-archive-filter-actions { grid-column: auto; }
+    .rb-archive-filter-actions .rb-filter-submit { flex: 1; }
+}
+
+
+/* Recipe archive card grid */
+.rb-recipe-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; padding:28px 0 48px; text-align:left; }
+.rb-recipe-card { min-width:0; overflow:hidden; border:1px solid #e8e8e3; border-radius:12px; background:#fff; box-shadow:0 5px 18px rgba(0,0,0,.06); transition:transform .18s ease,box-shadow .18s ease; }
+.rb-recipe-card:hover { transform:translateY(-3px); box-shadow:0 10px 26px rgba(0,0,0,.10); }
+.rb-recipe-card__link { display:flex; height:100%; flex-direction:column; color:inherit; text-decoration:none; }
+.rb-recipe-card__image { position:relative; overflow:hidden; aspect-ratio:4/3; background:#f0eee8; }
+.rb-recipe-card__image img { display:block; width:100%; height:100%; object-fit:cover; }
+.rb-recipe-card__content { display:flex; flex:1; flex-direction:column; padding:15px 16px 13px; }
+.rb-recipe-card__title { margin:0; color:#26332d; font-size:clamp(17px,1.5vw,21px); line-height:1.25; }
+.rb-recipe-card__excerpt { margin:9px 0 12px; color:#68736c; font-size:14px; line-height:1.5; }
+.rb-recipe-card__meta { display:flex; flex-wrap:wrap; gap:6px 12px; margin:auto 0 0; padding:10px 0 0; list-style:none; color:#68736c; font-size:12px; }
+.rb-recipe-card__meta li { margin:0; }
+.rb-recipe-card--photo .rb-recipe-card__image { aspect-ratio:5/4; }
+.rb-recipe-card--photo .rb-recipe-card__image-shade { position:absolute; inset:25% 0 0; background:linear-gradient(transparent,rgba(0,0,0,.72)); }
+.rb-recipe-card--photo .rb-recipe-card__title { position:absolute; z-index:1; right:16px; bottom:14px; left:16px; color:#fff; text-shadow:0 1px 4px rgba(0,0,0,.3); }
+.rb-recipe-card--photo .rb-recipe-card__content { padding-top:11px; }
+.rb-recipe-card--photo .rb-recipe-card__excerpt { margin-top:0; }
+.rb-archive-empty { grid-column:1/-1; }
+.rb-recipe-list .navigation.pagination { grid-column:1/-1; }
+.rb-recipe-card__link:hover .rb-recipe-card__title { text-decoration:underline; text-underline-offset:3px; }
+@media(max-width:900px) { .rb-recipe-list { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; } }
+@media(max-width:420px) { .rb-recipe-list { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } .rb-recipe-card__content { padding:10px; } .rb-recipe-card__title { font-size:15px; } .rb-recipe-card__excerpt { font-size:12px; } .rb-recipe-card__meta { gap:4px 8px; font-size:11px; } }
