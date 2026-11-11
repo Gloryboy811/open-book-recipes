@@ -10,7 +10,7 @@ $options = get_option( 'recipebook_settings', array() );
 $card_style = isset( $options['archive_card_style'] ) ? sanitize_key( $options['archive_card_style'] ) : 'photo';
 $card_style = in_array( $card_style, array( 'photo', 'classic' ), true ) ? $card_style : 'photo';
 $thumbnail = get_the_post_thumbnail_url( $recipe_id, 'large' );
-if ( ! $thumbnail ) { $thumbnail = recipebook_url . 'images/recipe_noimage.jpg'; }
+if ( ! $thumbnail ) { $thumbnail = recipebook_url . 'images/recipe-placeholder.svg'; }
 ?>
 <article class="rb-recipe-card rb-recipe-card--<?php echo esc_attr( $card_style ); ?>">
     <a class="rb-recipe-card__link" href="<?php the_permalink(); ?>">
