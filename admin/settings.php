@@ -20,7 +20,10 @@ function recipebook_settings_validate($args){
         'image_size' => array( 'corner', 'half', 'wide' ),
         'rating_place' => array( 'over', 'side' ),
     );
-    // Layouts 2 and 3 have been retired. Keep existing saved settings on Layout 1.\n    $args['layout_theme'] = 'basic';\n\n    foreach ( $allowed as $key => $values ) {
+    // Layouts 2 and 3 have been retired. Keep existing saved settings on Layout 1.
+    $args['layout_theme'] = 'basic';
+
+    foreach ( $allowed as $key => $values ) {
         if ( isset( $args[$key] ) && ! in_array( $args[$key], $values, true ) ) {
             unset( $args[$key] );
         }
