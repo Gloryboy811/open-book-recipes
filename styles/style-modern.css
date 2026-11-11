@@ -180,6 +180,7 @@
     color: #fff;
 }
 .rbm-ingredient-group { margin-top: 22px; }
+.rbm-ingredient-group.is-single { grid-column: 1 / -1; }
 .rbm-ingredient-list {
     margin: 0;
     padding: 0;
