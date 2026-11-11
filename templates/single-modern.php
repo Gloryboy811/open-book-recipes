@@ -22,7 +22,9 @@ $css_version = file_exists( $css_path ) ? filemtime( $css_path ) : '1.0';
     <?php
     $hero_image = get_the_post_thumbnail_url( $recipe_id, 'full' );
     $details = json_decode( (string) get_post_meta( $recipe_id, '_rb_recipe_details', true ) );
+    $details = is_object( $details ) ? $details : null;
     $times = json_decode( (string) get_post_meta( $recipe_id, '_rb_recipe_times', true ) );
+    $times = is_object( $times ) ? $times : null;
     $post_body = get_post_field( 'post_content', $recipe_id );
     $components_json = get_post_meta( $recipe_id, '_rb_recipe_components', false );
     $steps = get_post_meta( $recipe_id, '_rb_recipe_steps', false );
