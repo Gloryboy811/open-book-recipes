@@ -1,157 +1,36 @@
-<link href="<?php echo recipebook_url; ?>admin/admin.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo esc_url( recipebook_url . 'admin/admin.css' ); ?>" rel="stylesheet" type="text/css" />
 <div class="wrap">
-    <h2>Recipe Book Settings</h2>
-    <form action="options.php" method="post"><?php
-        settings_fields( 'recipebook_settings' );
-        do_settings_sections( __FILE__ );
-        
-        //get the older values, wont work the first time
-        
-        $options = get_option( 'recipebook_settings', array() );
-        $theme = isset( $options['layout_theme'] ) ? $options['layout_theme'] : 'basic';
-        ?>
-
-        
+    <h1>Recipe Book Settings</h1>
+    <form action="options.php" method="post">
+        <?php settings_fields( 'recipebook_settings' ); ?>
+        <?php $options = get_option( 'recipebook_settings', array() ); ?>
         <table class="form-table">
             <tr>
-                <th scope="row">Layout Style</th>
-                <td>
-                    <fieldset>
-                        <ul class="rb-image-select">
-                            <li>
-                                <label>
-                                    <input name="recipebook_settings[layout_theme]" type="radio" value="basic" <?php checked( $theme, 'basic' ); ?> />
-                                    <img src="<?php echo esc_url( recipebook_url . 'admin/images/theme-basic.svg' ); ?>" alt="<?php esc_attr_e( 'Layout 1 preview', 'recipebook' ); ?>" />
-                                    <span><?php esc_html_e( 'Layout 1', 'recipebook' ); ?></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input name="recipebook_settings[layout_theme]" type="radio" value="modern" <?php checked( $theme, 'modern' ); ?> />
-                                    <img src="<?php echo esc_url( recipebook_url . 'admin/images/theme-modern.svg' ); ?>" alt="<?php esc_attr_e( 'Modern layout preview', 'recipebook' ); ?>" />
-                                    <span><?php esc_html_e( 'Modern', 'recipebook' ); ?></span>
-                                </label>
-                            </li>
-                        </ul>
-                    </fieldset>
-                </td>
+                <th scope="row">Recipe Layout</th>
+                <td><fieldset><ul class="rb-image-select">
+                    <li><label><input name="recipebook_settings[layout_theme]" type="radio" value="basic" <?php checked( isset( $options['layout_theme'] ) ? $options['layout_theme'] : 'basic', 'basic' ); ?> /><img src="<?php echo esc_url( recipebook_url . 'admin/images/theme-basic.svg' ); ?>" alt="Layout 1 preview" /><span>Layout 1</span></label></li>
+                    <li><label><input name="recipebook_settings[layout_theme]" type="radio" value="modern" <?php checked( isset( $options['layout_theme'] ) ? $options['layout_theme'] : 'basic', 'modern' ); ?> /><img src="<?php echo esc_url( recipebook_url . 'admin/images/theme-modern.svg' ); ?>" alt="Modern layout preview" /><span>Modern</span></label></li>
+                </ul></fieldset></td>
             </tr>
             <tr>
-                <th scope="row">Card Style</th>
-                <td>
-                    <fieldset>
-                        <ul class="rb-image-select">
-                            <li>
-                                <label>
-                                    <input name="recipebook_settings[title_card]" type="radio" value="icons" id="" <?php echo (isset($options['title_card']) && $options['title_card'] == 'icons') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/title-1.png"/>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input name="recipebook_settings[title_card]" type="radio" value="heading" id="" <?php echo (isset($options['title_card']) && $options['title_card'] == 'heading') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/title-2.png"/>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input name="recipebook_settings[title_card]" type="radio" value="excerpt" id="" <?php echo (isset($options['title_card']) && $options['title_card'] == 'excerpt') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/title-3.png"/>
-                                </label>
-                            </li>
-                        </ul>
-                    </fieldset>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">Image Size</th>
-                <td>
-                    <fieldset>
-                        <ul class="rb-image-select">
-                            <li>
-                                <label>
-                                    <input name="recipebook_settings[image_size]" type="radio" value="corner" id="" <?php echo (isset($options['image_size']) && $options['image_size'] == 'corner') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/image-corner.png"/>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input name="recipebook_settings[image_size]" type="radio" value="half" id="" <?php echo (isset($options['image_size']) && $options['image_size'] == 'half') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/image-half.png"/>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input name="recipebook_settings[image_size]" type="radio" value="wide" id="" <?php echo (isset($options['image_size']) && $options['image_size'] == 'wide') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/image-wide.png"/>
-                                </label>
-                            </li>
-                        </ul>
-                    </fieldset>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">Rating Placement</th>
-                <td>
-                    <fieldset>
-                        <ul class="rb-image-select">
-                            <li>
-                                <label>
-                                    <input name="recipebook_settings[rating_place]" type="radio" value="over" id="" <?php echo (isset($options['rating_place']) && $options['rating_place'] == 'over') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/rating-over.png"/>
-                                </label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input name="recipebook_settings[rating_place]" type="radio" value="side" id="" <?php echo (isset($options['rating_place']) && $options['rating_place'] == 'side') ? 'checked' : ''; ?> />
-                                    <img src="<?php echo recipebook_url; ?>/admin/images/rating-side.png"/>
-                                </label>
-                            </li>
-                        </ul>
-                    </fieldset>
-                </td>
+                <th scope="row">Archive Card Style</th>
+                <td><fieldset><ul class="rb-image-select">
+                    <li><label><input name="recipebook_settings[archive_card_style]" type="radio" value="photo" <?php checked( isset( $options['archive_card_style'] ) ? $options['archive_card_style'] : 'photo', 'photo' ); ?> /><img src="<?php echo esc_url( recipebook_url . 'admin/images/archive-card-photo.svg' ); ?>" alt="Photo overlay card preview" /><span>Photo overlay</span></label></li>
+                    <li><label><input name="recipebook_settings[archive_card_style]" type="radio" value="classic" <?php checked( isset( $options['archive_card_style'] ) ? $options['archive_card_style'] : 'photo', 'classic' ); ?> /><img src="<?php echo esc_url( recipebook_url . 'admin/images/archive-card-classic.svg' ); ?>" alt="Classic card preview" /><span>Classic</span></label></li>
+                </ul></fieldset><p class="description">Choose how recipe cards appear on the recipe archive.</p></td>
             </tr>
             <tr>
                 <th scope="row">Accent Colours</th>
                 <td>
-                    Accent:
-                    <fieldset>
-                        <input type="color" name="recipebook_settings[accent_color]" value="<?php echo isset($options['accent_color']) ? esc_attr($options['accent_color']) : '#ff9800'; ?>" />
-                        <span style="margin-left:10px;">Preview: <span style="display:inline-block;width:24px;height:24px;background:<?php echo isset($options['accent_color']) ? esc_attr($options['accent_color']) : '#ff9800'; ?>;border:1px solid #ccc;"></span></span>
-                    </fieldset>
-                    &nbsp; Base:
-                    <fieldset>
-                        <input type="color" name="recipebook_settings[accent_color_base]" value="<?php echo isset($options['accent_color_base']) ? esc_attr($options['accent_color_base']) : '#a0650dff'; ?>" />
-                        <span style="margin-left:10px;">Preview: <span style="display:inline-block;width:24px;height:24px;background:<?php echo isset($options['accent_color_base']) ? esc_attr($options['accent_color_base']) : '#ff9800'; ?>;border:1px solid #ccc;"></span></span>
-                    </fieldset>
+                    <p>Accent <input type="color" name="recipebook_settings[accent_color]" value="<?php echo esc_attr( isset( $options['accent_color'] ) ? $options['accent_color'] : '#ff9800' ); ?>" /></p>
+                    <p>Base <input type="color" name="recipebook_settings[accent_color_base]" value="<?php echo esc_attr( isset( $options['accent_color_base'] ) ? $options['accent_color_base'] : '#a0650d' ); ?>" /></p>
                 </td>
             </tr>
             <tr>
                 <th scope="row">Custom CSS</th>
-                <td>
-                    <fieldset>
-                        <pre id="editor" style="height: 500px; width: 100%" name="recipebook_settings[custom_css]"></pre>
-<textarea name="recipebook_settings[custom_css]" style="display:none;"><?php 
-    echo isset($options['custom_css']) ? esc_textarea($options['custom_css']) : ''; 
-?></textarea>
-                    </fieldset>
-                </td>
+                <td><textarea name="recipebook_settings[custom_css]" rows="14" class="large-text code"><?php echo esc_textarea( isset( $options['custom_css'] ) ? $options['custom_css'] : '' ); ?></textarea></td>
             </tr>
         </table>
-        <input type="submit" class="button button-primary" value="Update Settings" />
+        <?php submit_button( 'Save Settings' ); ?>
     </form>
-        
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js"></script>
-    <script>
-    jQuery(document).ready(function($){
-        var editor = ace.edit("editor");
-        editor.session.setMode("ace/mode/css");
-        editor.setTheme("ace/theme/monokai");
-        var textarea = $('textarea[name="recipebook_settings[custom_css]"]');
-        editor.setValue(textarea.val(), -1); // -1 moves cursor to start
-        editor.session.on('change', function(){
-            textarea.val(editor.getValue());
-        });
-    });
-    </script>
 </div>
