@@ -16,12 +16,12 @@ function recipebook_settings_validate($args){
 
     $allowed = array(
         'layout_theme' => array( 'basic', 'modern' ),
-        'title_card' => array( 'icons', 'heading', 'excerpt' ),
-        'image_size' => array( 'corner', 'half', 'wide' ),
-        'rating_place' => array( 'over', 'side' ),
+        'archive_card_style' => array( 'photo', 'classic' ),
     );
-    // Layouts 2 and 3 have been retired. Keep existing saved settings on Layout 1.
-    $args['layout_theme'] = 'basic';
+    // Keep the selected supported recipe layout.
+    if ( ! isset( $args['layout_theme'] ) || ! in_array( $args['layout_theme'], array( 'basic', 'modern' ), true ) ) {
+        $args['layout_theme'] = 'basic';
+    }
 
     foreach ( $allowed as $key => $values ) {
         if ( isset( $args[$key] ) && ! in_array( $args[$key], $values, true ) ) {
