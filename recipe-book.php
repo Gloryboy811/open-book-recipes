@@ -146,7 +146,7 @@ function add_recipe_info($content) {
 	if ( is_singular() && in_the_loop() && is_main_query() && $post->post_type == 'recipes' ) {
 
 		$options = get_option( 'recipebook_settings' );
-		$theme = isset( $options['layout_theme'] ) && 'basic' === $options['layout_theme'] ? 'basic' : 'basic';
+		$theme = 'basic';
 
 		// check layout theme
 		$content_file =  dirname( __FILE__ )  . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . 'single-'.$theme.'.php';
