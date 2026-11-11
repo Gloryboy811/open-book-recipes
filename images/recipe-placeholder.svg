@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">Recipe image placeholder</title>
+  <desc id="desc">A simple illustration of a plate with a sprig of herbs and cutlery.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6f1e7"/>
+      <stop offset="1" stop-color="#e8e2d4"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffefa"/>
+      <stop offset="1" stop-color="#eee9dc"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="402" cy="302" r="190" fill="#d8d0c0" opacity=".42"/>
+  <circle cx="390" cy="282" r="178" fill="url(#plate)" stroke="#d2c8b6" stroke-width="7"/>
+  <circle cx="390" cy="282" r="145" fill="none" stroke="#e0d8ca" stroke-width="3"/>
+  <path d="M294 320c34-77 117-104 190-65 40 21 57 59 39 91-20 37-79 52-139 35-56-16-105-28-90-61Z" fill="#d9a45f" opacity=".82"/>
+  <path d="M319 299c36-42 88-56 135-37M344 346c45 13 91 11 130-9" fill="none" stroke="#b77b3e" stroke-width="9" stroke-linecap="round" opacity=".7"/>
+  <g fill="none" stroke="#71836b" stroke-width="8" stroke-linecap="round">
+    <path d="M486 183c-30-53-70-74-117-70M448 163c-5-37 4-62 29-82M455 170c35-22 66-23 92-5M421 149c-24-27-50-37-78-29"/>
+  </g>
+  <g fill="#8d9d7d">
+    <ellipse cx="357" cy="112" rx="28" ry="12" transform="rotate(18 357 112)"/>
+    <ellipse cx="480" cy="94" rx="28" ry="12" transform="rotate(-52 480 94)"/>
+    <ellipse cx="523" cy="165" rx="28" ry="12" transform="rotate(-8 523 165)"/>
+    <ellipse cx="344" cy="121" rx="24" ry="11" transform="rotate(48 344 121)"/>
+  </g>
+  <g fill="none" stroke="#9b8e7b" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M170 210v225M151 210v58c0 19 38 19 38 0v-58M151 268h38"/>
+    <path d="M631 210c-34 34-34 89 0 123v112M631 210v123"/>
+  </g>
+  <g fill="#a3a995" opacity=".7">
+    <circle cx="205" cy="480" r="5"/><circle cx="592" cy="130" r="6"/><circle cx="565" cy="463" r="4"/>
+  </g>
+</svg>
