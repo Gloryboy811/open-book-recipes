@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="290" viewBox="0 0 360 580" role="img" aria-labelledby="title desc">
+<title id="title">Basic recipe layout preview</title>
+<desc id="desc">Mobile recipe page matching the supplied Creamy Lemon Chicken screenshot, with a large food photograph, recipe title, calorie label, ingredients list and directions.</desc>
+<defs>
+  <linearGradient id="wood" x2="1" y2="1"><stop stop-color="#d6a56d"/><stop offset="1" stop-color="#8c5731"/></linearGradient>
+  <linearGradient id="plate" x2="0" y2="1"><stop stop-color="#fffef8"/><stop offset="1" stop-color="#e9e4d8"/></linearGradient>
+  <linearGradient id="chicken" x2="1" y2="1"><stop stop-color="#e7a13e"/><stop offset=".55" stop-color="#bd762b"/><stop offset="1" stop-color="#f0c36e"/></linearGradient>
+</defs>
+<rect width="360" height="580" rx="8" fill="#fff"/>
+<rect x="0" y="0" width="360" height="280" fill="url(#wood)"/>
+<path d="M0 34 Q90 5 190 32 T360 18 V280 H0Z" fill="#b98752" opacity=".45"/>
+<path d="M0 0 H170 L120 65 L0 90Z" fill="#507b2b"/>
+<path d="M0 12 Q50 32 134 0 M0 42 Q60 54 150 8 M0 72 Q65 70 158 18" fill="none" stroke="#9bbd55" stroke-width="12" stroke-linecap="round"/>
+<ellipse cx="188" cy="165" rx="172" ry="120" fill="#d4c7a9" opacity=".65"/>
+<ellipse cx="188" cy="150" rx="172" ry="120" fill="url(#plate)" stroke="#f8f4e9" stroke-width="5"/>
+<path d="M68 145 Q73 88 142 85 Q208 78 266 112 Q312 139 278 198 Q240 242 154 222 Q79 207 68 145Z" fill="url(#chicken)" stroke="#a96227" stroke-width="4"/>
+<path d="M94 128 Q127 103 156 120 M177 102 Q217 102 249 131 M104 177 Q144 200 184 187" fill="none" stroke="#8f4e20" stroke-width="8" stroke-linecap="round" opacity=".75"/>
+<path d="M112 126 Q148 91 201 116 Q252 132 260 157 Q231 178 183 169 Q138 166 112 126Z" fill="#f6e6c3"/>
+<path d="M151 131 Q184 111 222 138 Q239 151 219 167 Q181 177 151 151Z" fill="#fff1d6" opacity=".9"/>
+<path d="M82 202 Q153 230 249 195" fill="none" stroke="#fff9e9" stroke-width="7" stroke-linecap="round"/>
+<path d="M242 210 L335 245 M248 218 L338 255 M254 226 L341 265" stroke="#b8b9b5" stroke-width="5" stroke-linecap="round"/>
+<circle cx="303" cy="217" r="7" fill="#d2c6ac"/>
+<rect x="0" y="280" width="360" height="300" fill="#fff"/>
+<text x="18" y="310" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#27313a">Creamy Lemon Chicken</text>
+<path d="M18 323 H342" stroke="#e6e6e6"/>
+<rect x="25" y="333" width="92" height="20" rx="10" fill="#f5a020"/>
+<text x="71" y="347" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#fff">Calories: 450</text>
+<text x="18" y="372" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#27313a">Ingredients</text>
+<g font-family="Arial,sans-serif" font-size="8.5" fill="#27313a">
+  <g stroke="#e3e3e3"><path d="M18 392 H342 M18 417 H342 M18 442 H342 M18 467 H342 M18 492 H342 M18 517 H342"/></g>
+  <text x="25" y="408">400 g</text><text x="82" y="408">Green beans or veggie of your choice</text>
+  <text x="25" y="433">500 g</text><text x="82" y="433">Chicken breasts</text>
+  <text x="25" y="458">1½ tbsp</text><text x="82" y="458">Dijon Mustard</text>
+  <text x="25" y="483">2 tsp</text><text x="82" y="483">Italian Seasoning</text>
+  <text x="25" y="508">2 tsp</text><text x="82" y="508">Garlic Powder</text>
+</g>
+<path d="M73 390 V518" stroke="#f5a020" stroke-width="2"/>
+<text x="18" y="548" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#27313a">Directions</text>
+<path d="M18 560 H342 M18 568 H300 M18 576 H320" stroke="#c9c9c9" stroke-width="2"/>
+</svg>
