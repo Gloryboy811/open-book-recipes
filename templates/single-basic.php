@@ -15,7 +15,7 @@
     <?php $post_body = get_the_content(); 
     
     if ($post_body) {
-        echo $post_body;
+        echo wp_kses_post( $post_body );
         ?><hr/><?php
     }
     ?>
@@ -25,15 +25,15 @@
             <ul class="rb-details-list">
             <?php if($details->cals) { ?>
                 <li>
-                    <span>Calories:</span> <?php echo $details->cals; ?>
+                    <span>Calories:</span> <?php echo esc_html( $details->cals ); ?>
                 </li>
             <?php }  if($details->serves) { ?>
                 <li>
-                    <span>Serves:</span> <?php echo $details->serves; ?>
+                    <span>Serves:</span> <?php echo esc_html( $details->serves ); ?>
                 </li>
             <?php } if($details->difficulty) { ?>
                 <li>
-                    <span>Difficulty:</span> <?php echo $details->difficulty; ?>
+                    <span>Difficulty:</span> <?php echo esc_html( $details->difficulty ); ?>
                 </li>     
             <?php } 
 
@@ -43,7 +43,8 @@
                     <span>Meal type:</span> <?php
                     foreach($mealTypes as $i => $mt) {
                         if ($i > 0) { echo ', ';}
-                        echo '<a target="_blank" href="'.get_term_link($mt).'">'.$mt->name.'</a>';
+                        $term_url = get_term_link( $mt );
+                        if ( ! is_wp_error( $term_url ) ) { echo '<a target="_blank" rel="noopener noreferrer" href="' . esc_url( $term_url ) . '">' . esc_html( $mt->name ) . '</a>'; }
                     }
                     ?></li><?php
                 }
@@ -53,7 +54,8 @@
                     <span>Cuisine:</span> <?php
                     foreach($cuisines as $i => $c) {
                         if ($i > 0) { echo ', ';}
-                        echo '<a target="_blank" href="'.get_term_link($c).'">'.$c->name.'</a>';
+                        $term_url = get_term_link( $c );
+                        if ( ! is_wp_error( $term_url ) ) { echo '<a target="_blank" rel="noopener noreferrer" href="' . esc_url( $term_url ) . '">' . esc_html( $c->name ) . '</a>'; }
                     }
                     ?></li><?php
                 }
@@ -76,10 +78,10 @@
                     <h3>Prep Time</h3>
                     <div class="rb-time-amount"><?php 
                             if ($times->prepHrs) 
-                                echo '<div class="rb-time-part">'.$times->prepHrs.'<span>h</span></div>';
+                                echo '<div class="rb-time-part">' . esc_html( $times->prepHrs ) . '<span>h</span></div>';
                             
                             if ($times->prepMins) 
-                                echo '<div class="rb-time-part">'.$times->prepMins.'<span>m</span></div>';
+                                echo '<div class="rb-time-part">' . esc_html( $times->prepMins ) . '<span>m</span></div>';
                     ?></div>
                 </td>
                 <?php 
@@ -90,10 +92,10 @@
                     <h3>Cook Time</h3>
                     <div class="rb-time-amount"><?php 
                             if ($times->cookHrs) 
-                                echo '<div class="rb-time-part">'.$times->cookHrs.'<span>h</span></div>';
+                                echo '<div class="rb-time-part">' . esc_html( $times->cookHrs ) . '<span>h</span></div>';
                             
                             if ($times->cookMins) 
-                                echo '<div class="rb-time-part">'.$times->cookMins.'<span>m</span>';
+                                echo '<div class="rb-time-part">' . esc_html( $times->cookMins ) . '<span>m</span></div>';
                     ?></div>
                 </td>
                  <?php 
@@ -105,10 +107,10 @@
                     <div class="rb-time-amount">
                     <?php 
                             if ($times->totalHrs) 
-                                echo '<div class="rb-time-part">'.$times->totalHrs.'<span>h</span></div>';
+                                echo '<div class="rb-time-part">' . esc_html( $times->totalHrs ) . '<span>h</span></div>';
                             
                             if ($times->totalMins) 
-                                echo '<div class="rb-time-part">'.$times->totalMins.'<span>m</span></div>';
+                                echo '<div class="rb-time-part">' . esc_html( $times->totalMins ) . '<span>m</span></div>';
                         
                         ?>  
                     </div>
@@ -134,7 +136,7 @@
             } ?>
             <h4 class="rb-comp-subtitle"><?php
                 if ($multi) {
-                    echo $component->title;
+                    echo esc_html( $component->title );
                 } else {
                     echo '<p>Ingredients</p>';
                 } ?>
@@ -153,10 +155,10 @@
                     ?>
                     <tr>
                         <td>
-                            <b class="rb-rm-amount" data-amount="<?php echo trim($objInfo->amount); ?>"><?php echo toFrac($objInfo->amount); ?></b> <?php echo $objInfo->denom; ?>
+                            <b class="rb-rm-amount" data-amount="<?php echo esc_attr( trim( $objInfo->amount ) ); ?>"><?php echo esc_html( toFrac( $objInfo->amount ) ); ?></b> <?php echo esc_html( $objInfo->denom ); ?>
                         </td>
                         <td>
-                            <?php echo $objInfo->title; ?> <i><?php echo $objInfo->extra ?></i>
+                            <?php echo esc_html( $objInfo->title ); ?> <i><?php echo esc_html( $objInfo->extra ); ?></i>
                         </td>
                     </tr>
                     <?php 
@@ -179,13 +181,13 @@
         <?php 
             
             foreach($steps as $index => $step) {
-                echo '<li><div class="rb-comp-ing"><p>'.$step.'</p></div></li>';
+                echo '<li><div class="rb-comp-ing"><p>' . esc_html( $step ) . '</p></div></li>';
             }
         ?>
         
         </ol>
         <?php if ($notes) { ?>
-            <div class="rb-notes"><?php echo $notes; ?></div>
+            <div class="rb-notes"><?php echo esc_html( $notes ); ?></div>
         <?php } ?>
 
     </div>
@@ -199,7 +201,7 @@
                 <tr ><?php
                 if(is_array($detailsNutTitles)) {
                     foreach($detailsNutTitles as $key => $value) {
-                        echo '<th>'.$value.'</th>';
+                        echo '<th>' . esc_html( $value ) . '</th>';
                     }
                 }
             ?></tr>
@@ -208,7 +210,7 @@
                 <tr><?php
                 if(is_array($detailsNutTitles)) {
                     foreach($detailsNutAmounts as $key => $value) {
-                        echo '<td>'.$value.'</td>';
+                        echo '<td>' . esc_html( $value ) . '</td>';
                     }
                 }
             ?></tr>
@@ -219,10 +221,11 @@
     $gallery_pics = get_post_meta($post->ID, 'gallery_images', true);
     if (is_array($gallery_pics)) {
         foreach($gallery_pics as $key => $pic) {
-        $image_attributes = wp_get_attachment_image_src( $pic, 'full' ); 
+        $image_attributes = wp_get_attachment_image_src( absint( $pic ), 'full' ); 
+        if ( ! $image_attributes ) { continue; }
         ?><li>
-            <a href="<?php echo $image_attributes[0]; ?>" target="_blank">
-                <span class="rb-square-img" style="background-image: url('<?php echo $image_attributes[0]; ?>')"></span>
+            <a href="<?php echo esc_url( $image_attributes[0] ); ?>" target="_blank" rel="noopener noreferrer">
+                <span class="rb-square-img" style="background-image: url('<?php echo esc_url( $image_attributes[0] ); ?>')"></span>
             </a>
         </li><?php
         }

@@ -10,14 +10,34 @@ function recipebook_register_settings(){
 }
 
 function recipebook_settings_validate($args){
-    //$args will contain the values posted in your settings form, you can validate them as no spaces allowed, no special chars allowed or validate emails etc.
-    if(!isset($args['recipebook_email']) || !is_email($args['recipebook_email'])){
-        //add a settings error because the email is invalid and make the form field blank, so that the user can enter again
-        $args['recipebook_email'] = '';
-        add_settings_error('recipebook_settings', 'recipebook_invalid_email', 'Please enter a valid email!', $type = 'error');   
+    if ( ! is_array( $args ) ) {
+        return array();
     }
 
-    //make sure you return the args
+    $allowed = array(
+        'layout_theme' => array( 'basic', 'olive', 'magazine' ),
+        'title_card' => array( 'icons', 'heading', 'excerpt' ),
+        'image_size' => array( 'corner', 'half', 'wide' ),
+        'rating_place' => array( 'over', 'side' ),
+    );
+    foreach ( $allowed as $key => $values ) {
+        if ( isset( $args[$key] ) && ! in_array( $args[$key], $values, true ) ) {
+            unset( $args[$key] );
+        }
+    }
+    foreach ( array( 'accent_color', 'accent_color_base' ) as $color_key ) {
+        if ( isset( $args[$color_key] ) ) {
+            $color = sanitize_hex_color( $args[$color_key] );
+            if ( $color ) {
+                $args[$color_key] = $color;
+            } else {
+                unset( $args[$color_key] );
+            }
+        }
+    }
+    if ( isset( $args['custom_css'] ) ) {
+        $args['custom_css'] = wp_strip_all_tags( $args['custom_css'] );
+    }
     return $args;
 }
 

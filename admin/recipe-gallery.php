@@ -56,6 +56,7 @@ function recipe_meta_box_add() {
  */
 function recipe_print_box( $post ) {
 	$meta_key = 'gallery_images';
+	wp_nonce_field( 'recipebook_gallery_save_' . $post->ID, 'recipebook_gallery_nonce' );
 	echo recipe_image_uploader_field( $meta_key, get_post_meta($post->ID, $meta_key, true) );
 }
  
@@ -65,12 +66,26 @@ function recipe_print_box( $post ) {
 add_action('save_post', 'recipe_save');
  
 function recipe_save( $post_id ) {
-	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) 
-		return $post_id;
-	$meta_key = 'gallery_images';
-	if (isset($_POST['rb_gallery'])) {
-		update_post_meta( $post_id, $meta_key, $_POST['rb_gallery']); 
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
 	}
-	return $post_id;
-}
+	if ( wp_is_post_revision( $post_id ) || get_post_type( $post_id ) !== 'recipes' ||
+		! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+	if ( ! isset( $_POST['recipebook_gallery_nonce'] ) ||
+		! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['recipebook_gallery_nonce'] ) ), 'recipebook_gallery_save_' . $post_id ) ) {
+		return;
+	}
 
+	$gallery = array();
+	if ( isset( $_POST['rb_gallery'] ) && is_array( $_POST['rb_gallery'] ) ) {
+		foreach ( wp_unslash( $_POST['rb_gallery'] ) as $attachment_id ) {
+			$attachment_id = absint( $attachment_id );
+			if ( $attachment_id && get_post_type( $attachment_id ) === 'attachment' ) {
+				$gallery[] = $attachment_id;
+			}
+		}
+	}
+	update_post_meta( $post_id, 'gallery_images', array_values( array_unique( $gallery ) ) );
+}
