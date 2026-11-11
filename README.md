@@ -63,7 +63,7 @@ The Recipe Gallery section on the right of the screen will hold additional image
 # Settings (Alpha)
  In the Recipe Book menu item on the side, you will see a settings item.
  
- Choose between four recipe layouts: Basic, Olive, Magazine and the new Modern layout. Modern is designed mobile-first, with responsive ingredient, method, timing and gallery sections.
+ Choose between two recipe layouts: **Basic** and **Modern**. Basic retains the original recipe presentation. Modern is designed mobile-first, with responsive ingredient, method, timing and gallery sections.
  
  The rest of the settings do not work currently.
  
