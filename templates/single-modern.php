@@ -109,7 +109,7 @@ $css_version = file_exists( $css_path ) ? filemtime( $css_path ) : '1.0';
                             $amount = isset( $ingredient->amount ) ? (string) $ingredient->amount : '';
                         ?>
                             <li>
-                                <span class="rbm-ingredient-amount"><b class="rb-rm-amount" data-amount="<?php echo esc_attr( $amount ); ?>"><?php echo esc_html( toFrac( $amount ) ); ?></b><?php if ( ! empty( $ingredient->denom ) ) : ?> <?php echo esc_html( $ingredient->denom ); ?><?php endif; ?></span>
+                                <span class="rbm-ingredient-amount"><b class="rb-rm-amount" data-amount="<?php echo esc_attr( $amount ); ?>"><?php echo esc_html( toFrac( $amount ) ); ?></b><?php if ( ! empty( $ingredient->denom ) ) : ?> <span class="rb-rm-unit" data-unit="<?php echo esc_attr( $ingredient->denom ); ?>"><?php echo esc_html( $ingredient->denom ); ?></span><?php endif; ?></span>
                                 <span class="rbm-ingredient-name"><?php echo esc_html( $ingredient->title ?? '' ); ?><?php if ( ! empty( $ingredient->extra ) ) : ?> <small><?php echo esc_html( $ingredient->extra ); ?></small><?php endif; ?></span>
                             </li>
                         <?php endforeach; ?>
