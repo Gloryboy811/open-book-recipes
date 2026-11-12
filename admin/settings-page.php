@@ -11,6 +11,7 @@
                 <td><fieldset><ul class="rb-image-select">
                     <li><label><input name="recipebook_settings[layout_theme]" type="radio" value="basic" <?php checked( isset( $options['layout_theme'] ) ? $options['layout_theme'] : 'basic', 'basic' ); ?> /><img src="<?php echo esc_url( recipebook_url . 'admin/images/theme-basic.svg' ); ?>" alt="Layout 1 preview" /><span>Layout 1</span></label></li>
                     <li><label><input name="recipebook_settings[layout_theme]" type="radio" value="modern" <?php checked( isset( $options['layout_theme'] ) ? $options['layout_theme'] : 'basic', 'modern' ); ?> /><img src="<?php echo esc_url( recipebook_url . 'admin/images/theme-modern.svg' ); ?>" alt="Modern layout preview" /><span>Modern</span></label></li>
+                    <li><label><input name="recipebook_settings[layout_theme]" type="radio" value="cookbook" <?php checked( isset( $options['layout_theme'] ) ? $options['layout_theme'] : 'basic', 'cookbook' ); ?> /><img src="<?php echo esc_url( recipebook_url . 'admin/images/theme-cookbook.svg' ); ?>" alt="Editorial cookbook layout preview" /><span>Cookbook</span></label></li>
                 </ul></fieldset></td>
             </tr>
             <tr>
