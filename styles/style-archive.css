@@ -271,3 +271,59 @@ h2.rb-recipe-title:before {
 .rb-recipe-card__link:hover .rb-recipe-card__title { text-decoration:underline; text-underline-offset:3px; }
 @media(max-width:900px) { .rb-recipe-list { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; } }
 @media(max-width:420px) { .rb-recipe-list { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } .rb-recipe-card__content { padding:10px; } .rb-recipe-card__title { font-size:15px; } .rb-recipe-card__excerpt { font-size:12px; } .rb-recipe-card__meta { gap:4px 8px; font-size:11px; } }
+
+
+/* Mobile archive layout: prevent theme/container widths from forcing overflow. */
+.rb-archive-container,
+.rb-archive-container * {
+    box-sizing: border-box;
+}
+.rb-archive-container {
+    width: 100%;
+    max-width: 1220px;
+    min-width: 0;
+}
+.rb-archive-filters {
+    width: 100%;
+    max-width: 980px;
+    min-width: 0;
+}
+.rb-archive-search,
+.rb-archive-filter-fields,
+.rb-archive-filter,
+.rb-archive-filter-actions {
+    min-width: 0;
+}
+.rb-archive-search input,
+.rb-archive-filter select {
+    max-width: 100%;
+}
+.rb-recipe-list {
+    width: 100%;
+    min-width: 0;
+}
+@media (max-width: 760px) {
+    .rb-archive-container { padding-right: 12px; padding-left: 12px; }
+    .rb-archive-filters { margin-right: 0; margin-left: 0; padding: 14px; }
+    .rb-archive-filter-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .rb-archive-filter-actions { flex-wrap: wrap; }
+}
+@media (max-width: 520px) {
+    .rb-archive-container { padding-right: 10px; padding-left: 10px; }
+    .rb-archive-filters { padding: 12px; border-radius: 10px; }
+    .rb-archive-search { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+    .rb-archive-search input { min-width: 0; font-size: 16px; }
+    .rb-archive-search button { width: auto; min-width: 76px; padding-right: 12px; padding-left: 12px; }
+    .rb-archive-filter-fields { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+    .rb-archive-filter select { width: 100%; min-height: 44px; }
+    .rb-archive-filter-actions { display: flex; width: 100%; gap: 10px; }
+    .rb-archive-filter-actions .rb-filter-submit { flex: 1 1 auto; min-width: 0; }
+    .rb-archive-filter-actions .rb-filter-reset { flex: 0 0 auto; }
+    .rb-archive-result-count { padding: 0 2px; }
+}
+@media (max-width: 360px) {
+    .rb-archive-search { grid-template-columns: minmax(0, 1fr); }
+    .rb-archive-search button { width: 100%; }
+    .rb-archive-filter-actions { flex-wrap: wrap; }
+    .rb-archive-filter-actions .rb-filter-submit { flex-basis: 100%; }
+}
