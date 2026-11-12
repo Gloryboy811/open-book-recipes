@@ -159,7 +159,7 @@
                     ?>
                     <tr>
                         <td>
-                            <b class="rb-rm-amount" data-amount="<?php echo esc_attr( trim( $objInfo->amount ) ); ?>"><?php echo esc_html( toFrac( $objInfo->amount ) ); ?></b> <?php echo esc_html( $objInfo->denom ); ?>
+                            <b class="rb-rm-amount" data-amount="<?php echo esc_attr( trim( $objInfo->amount ) ); ?>"><?php echo esc_html( toFrac( $objInfo->amount ) ); ?></b> <span class="rb-rm-unit" data-unit="<?php echo esc_attr( $objInfo->denom ); ?>"><?php echo esc_html( $objInfo->denom ); ?></span>
                         </td>
                         <td>
                             <?php echo esc_html( $objInfo->title ); ?> <i><?php echo esc_html( $objInfo->extra ); ?></i>
