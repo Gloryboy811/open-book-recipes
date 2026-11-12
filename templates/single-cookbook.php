@@ -31,6 +31,12 @@ $format_time = static function( $hours, $minutes ) {
     }
     return implode( ' ', $parts );
 };
+$format_duration = static function( $hours, $minutes ) {
+    $duration = 'PT';
+    if ( (int) $hours > 0 ) { $duration .= (int) $hours . 'H'; }
+    if ( (int) $minutes > 0 ) { $duration .= (int) $minutes . 'M'; }
+    return $duration === 'PT' ? '' : $duration;
+};
 $prep_time = $times ? $format_time( $times->prepHrs ?? 0, $times->prepMins ?? 0 ) : '';
 $cook_time = $times ? $format_time( $times->cookHrs ?? 0, $times->cookMins ?? 0 ) : '';
 $total_time = $times ? $format_time( $times->totalHrs ?? 0, $times->totalMins ?? 0 ) : '';
@@ -63,9 +69,9 @@ $cuisines = is_array( $cuisines ) ? $cuisines : array();
 
     <section class="rbc-facts" aria-label="<?php esc_attr_e( 'Recipe details', 'recipebook' ); ?>">
         <?php if ( $details && ! empty( $details->serves ) ) : ?><div><span><?php esc_html_e( 'Serves', 'recipebook' ); ?></span><strong itemprop="recipeYield"><?php echo esc_html( $details->serves ); ?></strong></div><?php endif; ?>
-        <?php if ( $prep_time ) : ?><div><span><?php esc_html_e( 'Prep', 'recipebook' ); ?></span><strong itemprop="prepTime"><?php echo esc_html( $prep_time ); ?></strong></div><?php endif; ?>
-        <?php if ( $cook_time ) : ?><div><span><?php esc_html_e( 'Cook', 'recipebook' ); ?></span><strong itemprop="cookTime"><?php echo esc_html( $cook_time ); ?></strong></div><?php endif; ?>
-        <?php if ( $total_time ) : ?><div><span><?php esc_html_e( 'Total', 'recipebook' ); ?></span><strong itemprop="totalTime"><?php echo esc_html( $total_time ); ?></strong></div><?php endif; ?>
+        <?php if ( $prep_time ) : ?><div><span><?php esc_html_e( 'Prep', 'recipebook' ); ?></span><strong><time itemprop="prepTime" datetime="<?php echo esc_attr( $format_duration( $times->prepHrs ?? 0, $times->prepMins ?? 0 ) ); ?>"><?php echo esc_html( $prep_time ); ?></time></strong></div><?php endif; ?>
+        <?php if ( $cook_time ) : ?><div><span><?php esc_html_e( 'Cook', 'recipebook' ); ?></span><strong><time itemprop="cookTime" datetime="<?php echo esc_attr( $format_duration( $times->cookHrs ?? 0, $times->cookMins ?? 0 ) ); ?>"><?php echo esc_html( $cook_time ); ?></time></strong></div><?php endif; ?>
+        <?php if ( $total_time ) : ?><div><span><?php esc_html_e( 'Total', 'recipebook' ); ?></span><strong><time itemprop="totalTime" datetime="<?php echo esc_attr( $format_duration( $times->totalHrs ?? 0, $times->totalMins ?? 0 ) ); ?>"><?php echo esc_html( $total_time ); ?></time></strong></div><?php endif; ?>
         <?php if ( $details && ! empty( $details->difficulty ) ) : ?><div><span><?php esc_html_e( 'Level', 'recipebook' ); ?></span><strong><?php echo esc_html( ucfirst( $details->difficulty ) ); ?></strong></div><?php endif; ?>
     </section>
 
