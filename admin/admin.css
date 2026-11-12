@@ -488,3 +488,9 @@ ul.rb-image-select li label > span {
     text-align: center;
     font-weight: 600;
 }
+
+
+/* Keep layout thumbnails identical even when WordPress or the active admin theme styles images. */
+ul.rb-image-select > li { width: 220px !important; max-width: 100% !important; }
+ul.rb-image-select > li > label { width: 100% !important; }
+ul.rb-image-select > li > label > img { display: block !important; box-sizing: border-box !important; width: 220px !important; max-width: 100% !important; height: 145px !important; min-height: 145px !important; max-height: 145px !important; object-fit: contain !important; object-position: center !important; }
