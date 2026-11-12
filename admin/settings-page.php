@@ -1,4 +1,5 @@
-<link href="<?php echo esc_url( recipebook_url . 'admin/admin.css' ); ?>" rel="stylesheet" type="text/css" />
+<?php $admin_css_path = dirname( __FILE__ ) . '/admin.css'; $admin_css_version = file_exists( $admin_css_path ) ? filemtime( $admin_css_path ) : '1.0'; ?>
+<link href="<?php echo esc_url( recipebook_url . 'admin/admin.css?ver=' . $admin_css_version ); ?>" rel="stylesheet" type="text/css" />
 <div class="wrap">
     <h1>Recipe Book Settings</h1>
     <form action="options.php" method="post">
