@@ -168,7 +168,7 @@ function add_recipe_info($content) {
 
 		$options = get_option( 'recipebook_settings', array() );
 		$theme = isset( $options['layout_theme'] ) ? sanitize_key( $options['layout_theme'] ) : 'basic';
-		if ( ! in_array( $theme, array( 'basic', 'modern' ), true ) ) {
+		if ( ! in_array( $theme, array( 'basic', 'modern', 'cookbook' ), true ) ) {
 			$theme = 'basic';
 		}
 
