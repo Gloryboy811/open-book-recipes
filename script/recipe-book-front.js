@@ -6,7 +6,11 @@ var multiplyAmounts = (multi) => {
         if (amount.trim() !== '') {
             var scaledAmount = multiplyFullNumber(amount, multi);
             if (scaledAmount !== null) {
-                amounts[i].textContent = scaledAmount;
+                var unitElement = amounts[i].parentElement.querySelector('.rb-rm-unit');
+                var originalUnit = unitElement ? unitElement.getAttribute('data-unit') : '';
+                var display = getRelevantIngredientMeasure(parseIngredientAmount(amount) * multi, originalUnit);
+                amounts[i].textContent = display.amount;
+                if (unitElement) unitElement.textContent = display.unit;
             }
         }
     }
@@ -87,6 +91,29 @@ var formatIngredientAmount = (value) => {
         return sign + String(Number(absolute.toFixed(3)));
     }
     return sign + (whole ? String(whole) + ' ' : '') + closest;
+};
+
+
+/**
+ * Prefer tablespoons over teaspoons when the scaled quantity converts cleanly.
+ * Keep the original unit for awkward conversions rather than showing an ugly decimal.
+ */
+var getRelevantIngredientMeasure = (amount, originalUnit) => {
+    var unit = String(originalUnit || '').trim();
+    var normalized = unit.toLowerCase().replace(/\\./g, '');
+    var isTeaspoon = /^(tsp|teaspoon|teaspoons)$/.test(normalized);
+
+    if (isTeaspoon && amount >= 3) {
+        var tablespoons = amount / 3;
+        var formatted = formatIngredientAmount(tablespoons);
+        if (/^[0-9]+$/.test(formatted) || /[½⅓⅔¼¾⅛⅜⅝⅞]/.test(formatted)) {
+            var convertedUnit = unit;
+            if (/^tsp\\.?$/i.test(unit)) convertedUnit = 'tbsp';
+            else if (/^teaspoon(s)?$/i.test(unit)) convertedUnit = unit.toLowerCase() === 'teaspoons' ? 'tablespoons' : 'tablespoon';
+            return { amount: formatted, unit: convertedUnit };
+        }
+    }
+    return { amount: formatIngredientAmount(amount), unit: unit };
 };
 
 var multiplyFullNumber = (numberString, multi) => {
