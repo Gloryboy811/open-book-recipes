@@ -15,11 +15,11 @@ function recipebook_settings_validate($args){
     }
 
     $allowed = array(
-        'layout_theme' => array( 'basic', 'modern' ),
+        'layout_theme' => array( 'basic', 'modern', 'cookbook' ),
         'archive_card_style' => array( 'photo', 'classic' ),
     );
     // Keep the selected supported recipe layout.
-    if ( ! isset( $args['layout_theme'] ) || ! in_array( $args['layout_theme'], array( 'basic', 'modern' ), true ) ) {
+    if ( ! isset( $args['layout_theme'] ) || ! in_array( $args['layout_theme'], array( 'basic', 'modern', 'cookbook' ), true ) ) {
         $args['layout_theme'] = 'basic';
     }
 
