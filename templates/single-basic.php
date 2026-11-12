@@ -15,6 +15,8 @@
         $basic_css_version = file_exists( $basic_css_path ) ? filemtime( $basic_css_path ) : '1.0';
     ?>
     <link href="<?php echo esc_url( recipebook_url . 'styles/style-basic.css?ver=' . $basic_css_version ); ?>" rel="stylesheet" type="text/css" />
+    <article class="rb-basic-recipe" itemscope itemtype="https://schema.org/Recipe" aria-label="<?php echo esc_attr( sprintf( __( 'Recipe: %s', 'recipebook' ), get_the_title( $post->ID ) ) ); ?>">
+        <meta itemprop="name" content="<?php echo esc_attr( get_the_title( $post->ID ) ); ?>" />
     
     <?php $post_body = get_the_content(); 
     
@@ -235,3 +237,4 @@
         }
     } 
     ?></ul>
+    </article>
