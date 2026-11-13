@@ -12,7 +12,7 @@ $css_path = plugin_dir_path( dirname( __FILE__ ) ) . 'styles/style-modern.css';
 $css_version = file_exists( $css_path ) ? filemtime( $css_path ) : '1.0';
 ?>
 <link rel="stylesheet" href="<?php echo esc_url( recipebook_url . 'styles/style-modern.css?ver=' . $css_version ); ?>" />
-<article class="rb-modern">
+<article class="rb-modern" itemscope itemtype="https://schema.org/Recipe" aria-labelledby="rbm-title">
     <?php
     $hero_image = get_the_post_thumbnail_url( $recipe_id, 'full' );
     $details = json_decode( (string) get_post_meta( $recipe_id, '_rb_recipe_details', true ) );
@@ -50,7 +50,7 @@ $css_version = file_exists( $css_path ) ? filemtime( $css_path ) : '1.0';
         <?php endif; ?>
         <div class="rbm-hero-content">
             <p class="rbm-eyebrow"><?php esc_html_e( 'The recipe', 'recipebook' ); ?></p>
-            <h1 class="rbm-title"><?php echo esc_html( get_the_title( $recipe_id ) ); ?></h1>
+            <h1 id="rbm-title" class="rbm-title" itemprop="name"><?php echo esc_html( get_the_title( $recipe_id ) ); ?></h1>
             <?php if ( has_excerpt( $recipe_id ) ) : ?>
                 <p class="rbm-intro"><?php echo esc_html( get_the_excerpt( $recipe_id ) ); ?></p>
             <?php endif; ?>

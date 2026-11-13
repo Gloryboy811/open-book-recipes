@@ -63,10 +63,9 @@ The Recipe Gallery section on the right of the screen will hold additional image
 # Settings (Alpha)
  In the Recipe Book menu item on the side, you will see a settings item.
  
- Choose between four recipe layouts: Basic and the new Modern layout. Modern is designed mobile-first, with responsive ingredient, method, timing and gallery sections.
- Layout 1 is the supported recipe layout.
+ Choose between three recipe layouts: Basic, Modern and Cookbook. Modern is a clean, mobile-first layout. Cookbook uses a warm editorial design with bold typography, photo-led sections and a two-column ingredients layout on larger screens.
  
- The rest of the settings do not work currently.
+ Archive Card Style controls how recipes appear on the archive page. Accent colours and custom CSS can be used to customise the layouts.
  
 # Frontend (Alpha)
  
